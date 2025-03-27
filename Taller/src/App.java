@@ -12,6 +12,7 @@ public class App {
             System.out.println("1. Cliente");
             System.out.println("2. Coche");
             System.out.println("3. Citas");
+            System.out.println("4. Empleado");
             opcion = sc.nextInt();
             sc.nextLine();
 
