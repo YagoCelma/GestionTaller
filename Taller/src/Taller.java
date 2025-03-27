@@ -10,6 +10,7 @@ public class Taller {
     ArrayList<Coche> coches = new ArrayList<>();
     ArrayList<Citas> citas = new ArrayList<>();
     ArrayList<Cliente> clientes = new ArrayList<>();
+    ArrayList<Empleado> empleados = new ArrayList<>();
 
     /*Metodos de Clientes */
     public void menuCliente(){
@@ -242,6 +243,130 @@ public class Taller {
         System.out.println("Que quieres modificar del coche?");
         System.out.println("1. Matricula");
 
+    }
+
+    /*Fin de coches */
+    /*------------------------------------------------------------------------------------------ */
+    /*Empleados */
+
+    public void menuEmpleado(){
+        int opcion;
+
+        do{
+            System.out.println("Menu de empleados");
+            System.out.println("1. Añadir");
+            System.out.println("2. Borrar");
+            System.out.println("3. Modificar");
+            System.out.println("4. Salir");
+            opcion = sc.nextInt();
+        }while(opcion != 4);
+
+    }
+    
+    public void añadirEmpleado(){
+
+        String idEmpleado;
+        boolean pasar;
+
+        do{
+            System.out.println("Introduzca el ID del empleado");
+            idEmpleado = sc.nextLine();
+            pasar = false;
+
+            for(Empleado empleado : this.empleados){
+                if(empleado.getID().equals(idEmpleado)){
+                    System.out.println("Ese ID ya pertenece a un empleado");
+                    pasar = true;
+                    break;
+                }
+            }
+        }while(pasar == true);
+
+        System.out.println("Nombre del empleado:");
+        String nombre = sc.nextLine();
+
+        System.out.println("Numero de telefono:");
+        int telefono = sc.nextInt();
+        sc.nextLine();
+
+        System.out.println("Direccion del empleado:");
+        String direccion = sc.nextLine();
+
+        System.out.println("Salario");
+        double salario = sc.nextDouble();
+        sc.nextLine();
+
+        empleados.add(new Empleado(idEmpleado, nombre, telefono, direccion, salario));
+        System.out.println("El empleado a sido añadido con exito");
+    }
+    public void borrarEmpleado(){
+        
+        String idEmpleado;
+        boolean seguir = true;
+
+        do{
+            System.out.println("ID del empleado que quiere borrar");
+            idEmpleado = sc.nextLine();
+
+            for(Empleado empleado : this.empleados){
+                if(idEmpleado.equals(empleado.getID())){
+                    this.empleados.remove(empleado);
+                    System.out.println("El empleado ha sido borrado con exito");
+                    seguir = false;
+                    return;
+                }
+            }
+            System.out.println("El empleado no ha sido encontrado");
+        }while(seguir = true);
+    }
+
+    public void menuModificarEmpleado(){
+
+        if(!empleados.isEmpty()){
+            Empleado empleado = encontrarEmpleado();
+
+            System.out.println("Menu de modificar empleado:");
+            System.out.println("1. Modificar el telefono");
+            System.out.println("2. Modificar el direccion");
+            System.out.println("3. Modificar el salario");
+            int opcion = sc.nextInt();
+    
+            switch(opcion){
+                case 1-> {
+                    System.out.println("Dime el nuevo numero de telefono");
+                    int nuevoTelefono = sc.nextInt();
+                    sc.nextLine();
+                    empleado.setTelefono(nuevoTelefono);
+                }
+                case 2->{
+                    System.out.println("Dime la nueva direccion");
+                    String nuevaDireccion = sc.nextLine();
+                    empleado.setDireccion(nuevaDireccion);
+                }
+                case 3->{
+                    System.out.println("Dime el nuevo salario");
+                    Double nuevoSalario = sc.nextDouble();
+                    sc.nextLine();
+                    empleado.setSalario(nuevoSalario);
+                }
+            }
+        }
+    }
+    public Empleado encontrarEmpleado(){
+        String idEmpleado;
+        boolean seguir = true;
+
+        do{
+            System.out.println("Introduce el ID del empleado");
+            idEmpleado = sc.nextLine();
+
+            for(Empleado empleado : this.empleados){
+                if(empleado.getID().equals(idEmpleado)){
+                    return empleado;
+                }
+            }
+        }while(seguir == true);
+        return null;
     }
 
 }
