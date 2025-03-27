@@ -156,7 +156,7 @@ public class Taller {
             switch(opcion){
                 case 1-> añadirCoche();
                 case 2-> borrarCoche();
-                case 3-> menuModificarCoche();
+                case 3-> //menuModificarCoche();
             }
         }while(opcion != 5);
     }
@@ -211,6 +211,37 @@ public class Taller {
                 }
             }
         }while(seguir == true);
+
+        coches.add(new Coche(matricula, marca, modelo, año, dniAsociado));
+    }
+
+    public void borrarCoche(){
+        
+        boolean seguir = true;
+        if(!this.coches.isEmpty()){
+            do{
+                System.out.println("Introduzca la matricula del coche");
+                String matricula = sc.nextLine();
+    
+                for(Coche coche : this.coches){
+                    if(coche.getMatricula().equals(matricula)){
+                        coches.remove(coche);
+                        System.out.println("El coche ha sido eliminado con exito");
+                        return;
+                    }
+                }
+                System.out.println("No se ha encontrado el coche");
+            }while(seguir);
+        }else{
+            System.out.println("La lista de coches esta vacia, no puedes borrar nada");
+        }
+
+    }
+
+    public void menuModificarCoche(){
+        System.out.println("Que quieres modificar del coche?");
+        System.out.println("1. Matricula");
+
     }
 
 }
