@@ -213,4 +213,13 @@ public class Taller {
         }while(seguir == true);
     }
 
-}
+
+
+    //Metodos pedidos
+    public void pedidos(){
+        
+    }
+
+
+}   
+
