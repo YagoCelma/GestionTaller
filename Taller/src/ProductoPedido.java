@@ -2,10 +2,10 @@ import java.time.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Pedidos {
+public class ProductoPedido {
     ArrayList<Pedidos> pedido= new ArrayList<>();
     HashMap <Integer, ArrayList<Pedidos>> listaPedidos=new HashMap <>();
-    private int idPedido;
+    private int codigoProducto;
     private int idProveedor;
     private String nombre;
     private Double precioProducto;
@@ -14,8 +14,8 @@ public class Pedidos {
     private LocalDate fechaCompra; //=LocalDate.of(1990, 5, 15);
     private LocalDate fechaLLegada = null;
 
-    public Pedidos (int idPedido, int idProveedor, String nombre, Double precioProducto, Double cantidad, int año, int mes, int dia, int año2, int mes2, int dia2){
-        this.idPedido=idPedido;
+    public ProductoPedido (int codigoProducto, int idProveedor, String nombre, Double precioProducto, Double cantidad, int año, int mes, int dia, int año2, int mes2, int dia2){
+        this.codigoProducto=codigoProducto;
         this.idProveedor=idProveedor;
         this.nombre=nombre;
         this.precioProducto=precioProducto;
