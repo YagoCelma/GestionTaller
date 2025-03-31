@@ -1,3 +1,5 @@
+package model;
+
 public class Reparaciones {
 
     private String nombreReparacion;

@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
-        Taller taller = new Taller();
+        Taller taller = new Taller(5000);
 
         int opcion;
 
@@ -18,7 +18,10 @@ public class App {
 
             switch(opcion){
                 case 1-> taller.menuCliente();
+                case 2-> taller.menuCoche();
+                //case 3-> taller.menuCitas();
+                case 4-> taller.menuEmpleado();
             }
-        }while(opcion != 5);
+        }while(//opcion != 5);
     }
 }

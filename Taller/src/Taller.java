@@ -12,6 +12,13 @@ public class Taller {
     ArrayList<Cliente> clientes = new ArrayList<>();
     ArrayList<Empleado> empleados = new ArrayList<>();
 
+    //Atributos informacion taller
+    private double saldo;
+
+    public Taller(double saldo){
+        this.saldo = saldo;
+    }
+
     /*Metodos de Clientes */
     public void menuCliente(){
         System.out.println("1. Añadir cliente");
@@ -26,6 +33,8 @@ public class Taller {
             case 3-> menuModificarCliente();
         }
     }
+
+    
 
     public void añadirCliente(){
         String idCliente;
@@ -137,6 +146,7 @@ public class Taller {
                     return cliente;
                 }
             }
+            System.out.println("No se ha encontrado el empleado");
         }while(seguir == true);
         return null;
     }
@@ -236,13 +246,30 @@ public class Taller {
         }else{
             System.out.println("La lista de coches esta vacia, no puedes borrar nada");
         }
-
     }
 
     public void menuModificarCoche(){
         System.out.println("Que quieres modificar del coche?");
         System.out.println("1. Matricula");
 
+    }
+
+    public Coche encontrarCoche(){
+        String matricula;
+        boolean seguir = true;
+
+        do{
+            System.out.println("Introduce la matricula del coche");
+            matricula = sc.nextLine();
+
+            for(Coche coche : this.coches){
+                if(coche.getMatricula().equals(matricula)){
+                    return coche;
+                }
+            }
+            System.out.println("No se ha encontrado el coche");
+        }while(seguir == true);
+        return null;
     }
 
     /*Fin de coches */
@@ -367,6 +394,30 @@ public class Taller {
             }
         }while(seguir == true);
         return null;
+    }
+
+    /*FIN EMLEADO */
+    /*--------------------------------------------------------------------------------------- */
+    /*Reparaciones */
+    public void añadirReparacion(){
+        System.out.println("Indica el nombre de la reparacion");
+        String nombreReparacion = sc.nextLine();
+
+        Cliente cliente = encontrarCliente();
+        String idCliente = cliente.getDNI();
+
+        Coche coche = encontrarCoche();
+        String matricula = coche.getMatricula();
+
+        Double precioReparacion;
+        do{
+            System.out.println("Introduzca el coste de la reparacion");
+            precioReparacion = sc.nextDouble();
+            sc.nextInt();
+        }while(precioReparacion < 0);
+
+        Empleado empleado = encontrarEmpleado();
+        String idEmpleado = empleado.getID();
     }
 
 }
