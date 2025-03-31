@@ -1,8 +1,8 @@
 package PaqueteTaller.view;
-import java.time.LocalDateTime;
-import java.util.Scanner;
 import PaqueteTaller.Citas;
 import PaqueteTaller.DAO.CitasDao;
+import java.time.LocalDateTime;
+import java.util.Scanner;
 
 public class CitasView {
 
@@ -34,6 +34,7 @@ public class CitasView {
     public void crearCita(){
         //el id de la cita se asignará automáticamente después en la BD
         String dniCliente;
+        String matricula;
         int año;
         int mes;
         int dia;
@@ -66,7 +67,10 @@ public class CitasView {
         System.out.println("Escribe el asunto:");
         asunto=sc.nextLine();
 
-        Citas cita= new Citas(fecha, dniCliente, asunto);
+        System.out.println("Introduce la matrícula:");
+        matricula=sc.nextLine();
+
+        Citas cita= new Citas(fecha, dniCliente, asunto, matricula);
 
     }
     public void verCitas(){
@@ -96,10 +100,6 @@ public class CitasView {
 
         }
 
-
-
-
-
     }
 
     public void verCitasDni(){
@@ -110,11 +110,98 @@ public class CitasView {
 
     }
     public void eliminarCita(){
+        int id;
+        int opcion;
+
+        this.verCitasDni();
+        System.out.println("Escribe el ID de la cita que desea eliminar");
+        id=sc.nextInt();
+        sc.nextLine();
+        citasDao.eliminarCita(id); 
+    }
+
+    public void modificarCita(){
+        int opcion;
+        int id;
+        int subopcion;
+        String matricula;
+        LocalDateTime fecha;
+        String dni;
+        String asunto;
+        int año;
+        int mes;
+        int dia;
+        int hora;
+        int minuto;
 
         this.verCitas();
+        System.out.println("Escribe el ID de la cita que desea eliminar");
+        id=sc.nextInt();
+        sc.nextLine();
         
+        do{
+            do{
+                System.out.println("Elige que desea modificar:");
+                System.out.println("1. Vehículo");
+                System.out.println("2. Fecha");
+                System.out.println("3. DNI");
+                System.out.println("4. Asunto");
+                System.out.println("5. Salir");
+
+                opcion=sc.nextInt();
+                sc.nextLine();
+                switch(opcion){
+                    case 1 -> {
+                        System.out.println("Escribe la nueva matricula");
+                        matricula=sc.nextLine();
+                        citasDao.modificarCitaMatricula(id, matricula);
+                        System.out.println("¡Modificado!");
+                    }
+                    case 2 -> {
+                        System.out.println("Escribe la nueva fecha");
+                        System.out.println("Año:");
+                        año=sc.nextInt();
+                        sc.nextLine();
+                        System.out.println("Mes:");
+                        mes=sc.nextInt();
+                        sc.nextLine();
+                        System.out.println("Día:");
+                        dia=sc.nextInt();
+                        sc.nextLine();
+                        System.out.println("Hora:");
+                        hora=sc.nextInt();
+                        sc.nextLine();
+                        System.out.println("Minuto:");
+                        minuto=sc.nextInt();
+                        sc.nextLine();
+                        fecha=LocalDateTime.of(año, mes, dia, hora, minuto);
+                        
+                        citasDao.modificarCitaFecha(id, fecha);
+                        System.out.println("¡Modificado!");
+                    }
+                    case 3 -> {
+                        System.out.println("Escribe el nuevo DNI");
+                        dni=sc.nextLine();
+                        citasDao.modificarCitaDni(id, dni);
+                        System.out.println("¡Modificado!");
+                    }
+                    case 4 -> {
+                        System.out.println("Escribe el nuevo asunto");
+                        asunto=sc.nextLine();
+                        citasDao.modificarCitaAsunto(id, asunto);
+                        System.out.println("¡Modificado!");
+                    }
+
+                }
+
+            }while (opcion!=5);
+
+        }while(subopcion!=2);
+
+
 
 
     }
+
 
 }
