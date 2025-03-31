@@ -21,6 +21,8 @@ public class App {
 
             switch(opcion){
                 case 1-> clienteView.menuCliente();
+
+                case 3 -> citasView.menuCitas();
             }
         }while(opcion != 5);
     }

@@ -8,7 +8,7 @@ public class Taller {
 
     //Atributos taller
     ArrayList<Coche> coches = new ArrayList<>();
-    ArrayList<Citas> citas = new ArrayList<>();
+    ArrayList<CitasView> citas = new ArrayList<>();
     ArrayList<Cliente> clientes = new ArrayList<>();
 
     /*Metodos de Clientes */

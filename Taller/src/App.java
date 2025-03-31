@@ -18,6 +18,7 @@ public class App {
 
             switch(opcion){
                 case 1-> taller.menuCliente();
+                case 3 -> 
                 case 4-> taller.pedidos();
             }
         }while(opcion != 5);
