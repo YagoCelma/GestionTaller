@@ -3,7 +3,6 @@ import PaqueteTaller.Citas;
 import PaqueteTaller.DAO.CitasDao;
 import java.time.LocalDateTime;
 import java.util.Scanner;
-
 public class CitasView {
 
     Scanner sc = new Scanner(System.in);
@@ -88,15 +87,11 @@ public class CitasView {
         sc.nextLine();
 
         switch(opcion){
-            case 1 ->{
-
-            }
-            case 2 ->{}
-            case 3 ->{}
-            case 4 ->{}
-            case 5 ->{}
-
-
+            case 1 ->{this.verCitasDni();}
+            case 2 ->{this.verCitasFecha();}
+            case 3 ->{this.verCitasMatricula();}
+            case 4 ->{this.verCitasId();}
+        
 
         }
 
@@ -106,9 +101,77 @@ public class CitasView {
         String dni;
         System.out.println("Introduce el DNI");
         dni=sc.nextLine();
-        citasDao.citasByDni(dni);
+        citasDao.verCitasDni(dni);
 
     }
+    public void verCitasMatricula(){
+        String matricula;
+        System.out.println("Introduce la matrícula");
+        matricula=sc.nextLine();
+        citasDao.verCitasMatricula(matricula);
+
+    }
+    public void verCitasId(){
+        int id;
+        System.out.println("Introduce el ID");
+        id=sc.nextInt();
+        sc.nextLine();
+        citasDao.verCitasId(id);
+    }
+    public void verCitasFecha(){
+        int opcion;
+        int año;
+        int mes;
+        int dia;
+        int hora;
+        int minuto;
+        LocalDateTime fecha;
+        System.out.println("Escribe la nueva fecha");
+        System.out.println("Si quieres evitar un dato, escribe 0");
+        System.out.println("Por ejemplo: si solo quieres ver los pedidos de un mes, introduce 0 en los demás datos expecto en el del mes");
+       
+       /* 
+        System.out.println("Filtra por:");
+        System.out.println("1. Año");
+        System.out.println("2. Mes");
+        System.out.println("3. Día");
+        System.out.println("4. Hora");
+        System.out.println("5. Minuto");
+
+
+        opcion=sc.nextInt();
+        sc.nextLine();
+        switch (opcion){
+            case 1 ->{
+                System.out.println("Año:");
+                año=sc.nextInt();
+                sc.nextLine();
+                fecha=(año, null, null, null, null);
+            }
+        }
+        */
+        System.out.println("Año:");
+        año=sc.nextInt();
+        sc.nextLine();
+        System.out.println("Mes:");
+        mes=sc.nextInt();
+        sc.nextLine();
+        System.out.println("Día:");
+        dia=sc.nextInt();
+        sc.nextLine();
+        System.out.println("Hora:");
+        hora=sc.nextInt();
+        sc.nextLine();
+        System.out.println("Minuto:");
+        minuto=sc.nextInt();
+        sc.nextLine();
+        fecha=LocalDateTime.of(año, mes, dia, hora, minuto);
+
+        
+        citasDao.verCitasFecha(fecha);
+
+    }
+    
     public void eliminarCita(){
         int id;
         int opcion;
@@ -134,12 +197,14 @@ public class CitasView {
         int hora;
         int minuto;
 
+        
         this.verCitas();
-        System.out.println("Escribe el ID de la cita que desea eliminar");
+        do{
+        System.out.println("Escribe el ID de la cita que desea modificar");
         id=sc.nextInt();
         sc.nextLine();
         
-        do{
+        
             do{
                 System.out.println("Elige que desea modificar:");
                 System.out.println("1. Vehículo");
@@ -195,6 +260,13 @@ public class CitasView {
                 }
 
             }while (opcion!=5);
+
+            System.out.println("¿Desea modificar otra cita?");
+            System.out.println("1. Sí");
+            System.out.println("2. No");
+            subopcion=sc.nextInt();
+
+
 
         }while(subopcion!=2);
 
