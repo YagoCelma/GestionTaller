@@ -1,22 +1,21 @@
 package PaqueteTaller.view;
 
+import PaqueteTaller.Reparaciones;
 import java.util.LinkedList;
 import java.util.Scanner;
-import PaqueteTaller.Reparaciones;
-
 
 public class ReparacionesView { 
 
     Scanner sc = new Scanner(System.in);
     CitasView citas= new CitasView();
-    LinkedList <Integer> idEmpleados;
-    Reparaciones reparacion= new Reparaciones();
+    
+    
 
     public void crearReparacion(){
         String nombreReparacion;
         double precio;
         int opcion;
-        idEmpleados = new LinkedList<>();
+        LinkedList <Integer> idEmpleados = new LinkedList<>();
         int idEmpleado;
         String asunto;
         int idCita;
@@ -49,7 +48,7 @@ public class ReparacionesView {
         sc.nextLine();
 
 
-
+        Reparaciones reparacion= new Reparaciones(nombreReparacion, precio, idEmpleados, asunto, idCita );
 
     }
 
