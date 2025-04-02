@@ -7,8 +7,7 @@ import java.sql.SQLException;
 
 public class ConexionBD {
     // URL de conexión a la base de datos MySQL
-    public static final String URL = 
-   "jdbc:mysql://localhost:3306/gestiontaller"; // Cambia el nombre de la base de datos
+    public static final String URL = "jdbc:mysql://localhost:3306/gestiontaller"; // Cambia el nombre de la base de datos
    
     public static final String USUARIO = "yago"; // Nombre de usuario de MySQL
    

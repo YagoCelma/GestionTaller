@@ -2,6 +2,8 @@ package view;
 
 import model.Coche;
 import dao.CocheDAO;
+
+import java.sql.Connection;
 import java.util.Scanner;
 
 
@@ -56,8 +58,7 @@ public class CocheView {
         System.out.println("DNI del cliente dueño del coche");
         String dniAsociado = sc.nextLine();
 
-        Coche coche = new Coche(matricula, marca, modelo, año, dniAsociado);
-        cocheDAO.añadirCoche(coche);
+        cocheDAO.añadirCoche(matricula, marca, modelo, año, dniAsociado);
         System.out.println("El cliente ha sido añadido con exito");
     }
 
