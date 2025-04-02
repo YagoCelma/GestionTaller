@@ -10,7 +10,11 @@ import java.util.Scanner;
 public class CocheView {
 
     private Scanner sc = new Scanner(System.in);
-    private CocheDAO cocheDAO = new CocheDAO();
+    private CocheDAO cocheDAO;
+    
+    public CocheView(Connection conexion) {
+        this.cocheDAO = new CocheDAO(conexion);
+    }
     
     public void menuCoche(){
 
