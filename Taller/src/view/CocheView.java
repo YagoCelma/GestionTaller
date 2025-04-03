@@ -46,7 +46,7 @@ public class CocheView {
             System.out.println("Matricula del vehiculo");
             matricula = sc.nextLine();
             matriculaRepetida = cocheDAO.matriculaRepetida(matricula);
-        }while(matriculaRepetida = true);
+        }while(matriculaRepetida = false);
 
 
         System.out.println("Marca:");

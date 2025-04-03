@@ -1,12 +1,19 @@
 package view;
 import java.util.Scanner;
+import java.sql.Connection;
 import dao.EmpleadoDAO;
 import model.Empleado;
 
 public class EmpleadoView {
 
     private Scanner sc = new Scanner(System.in);
-    private EmpleadoDAO empleadoDAO = new EmpleadoDAO();
+    private Connection conexion;
+    private EmpleadoDAO empleadoDAO;
+
+    public EmpleadoView(Connection conexion) {
+        this.conexion = conexion;
+        this.empleadoDAO = new EmpleadoDAO(conexion);
+    }
 
     public void menuEmpleado(){
 

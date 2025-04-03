@@ -58,17 +58,23 @@ public class CocheDAO {
     }
 
     public boolean matriculaRepetida(String matricula) {
-        String query = "SELECT COUNT(*) FROM coches WHERE matricula = ?";
-        try (PreparedStatement stmt = conexion.prepareStatement(query)) {
-            stmt.setString(1, matricula);
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                return rs.getInt(1) > 0;
+        if(conexion != null){
+            String query = "SELECT COUNT(*) FROM coches WHERE matricula = ?";
+            try (PreparedStatement stmt = conexion.prepareStatement(query)) {
+                stmt.setString(1, matricula);
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            } catch (SQLException e) {
+                System.out.println("Error al comprobar la matrícula: " + e.getMessage());
             }
-        } catch (SQLException e) {
-            System.out.println("Error al comprobar la matrícula: " + e.getMessage());
+            return false;
+        }else{
+            System.out.println("Error: No hay conexión a la base de datos.");
+            return false;
         }
-        return false;
+
     }
 
     public Coche cocheByMatricula(String matricula) {
