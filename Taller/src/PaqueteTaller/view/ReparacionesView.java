@@ -25,7 +25,7 @@ public class ReparacionesView {
                 case 1 ->{this.crearReparacion();}
                 case 2 ->{this.eliminarReparacion();}
                 case 3 ->{this.modificarReparacion();}
-                case 4 ->{this.mostrarReparacion();}
+                case 4 ->{this.mostrarReparacionMenu();}
             }
         }while(opcion!=5);
 
@@ -117,11 +117,58 @@ public class ReparacionesView {
         reparacionDao.eliminarReparacion(idReparacion);
     }
 
-    public void mostrarReparacion(){
-        System.out.println("¿Cómo desea ver la reparación?");
-        System.out.println("1. Ver todas");
-        System.out.println("1. Por ID");
-        System.out.println("1. Por ID");
+    public void mostrarReparacionMenu(){
+        int opcion;
+        do{
+            System.out.println("¿Cómo desea ver la reparación?");
+            System.out.println("1. Ver todas");
+            System.out.println("2. Por ID");
+            System.out.println("3. Por fecha de inicio");
+            System.out.println("4. Por fecha final");
+            System.out.println("5. Más recientes (a partir de una fecha)");
+            System.out.println("6. Por empleado");
+            System.out.println("7. Activas (todavía no terminadas)");
+            System.out.println("8. Por vehículo");
+            System.out.println("9. Salir");
+            opcion=sc.nextInt();
+            switch(opcion){
+                case 1 ->{this.mostrarReparaciones();}
+                case 2 -> {this.mostrarReparacionById();}
+                case 3 -> {this.mostrarReparacionByFechaInicio();}
+                case 4 -> {this.mostrarReparacionByFechaFinal();}
+                case 5 -> {this.mostrarReparacionByMasRecientes();}
+                case 6 -> {this.mostrarReparacionByEmpleado();}
+                case 7 -> {this.mostrarReparacionActiva();}
+                case 8 -> {this.mostrarReparacionByVehiculo();}
+            }
+        }while(opcion!=9);   
+    }
+
+    public void mostrarReparacionByVehiculo(){
+        String matricula;
+        System.out.println("Introduce la matrícula");
+        matricula = sc.nextLine();
+        reparacionDao.mostrarReparacionByMatricula(matricula);
+    }
+
+    public void mostrarReparaciones(){
+        reparacionDao.mostrarReparaciones();
+    }
+
+    public void mostrarReparacionActiva(){
+        reparacionDao.mostrarReparacionActiva();
+    }
+
+    public void mostrarReparacionByEmpleado(){
+        int idEmpleado;
+        System.out.println("Introduce el ID del trabajador");
+        idEmpleado = sc.nextInt();
+        sc.nextLine();
+       
+        
+        reparacionDao.mostrarReparacionByTrabajador(idEmpleado);
+
+
     }
 
     public void mostrarReparacionById(){

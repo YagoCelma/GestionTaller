@@ -55,6 +55,18 @@ public class ReparacionesDao {
 
     }
 
+    public void mostrarReparaciones(){
+
+    }
+
+    public void mostrarReparacionByTrabajador(int idEmpleado){
+
+    }
+
+    public void mostrarReparacionActiva(){
+
+    }
+
     public void mostrarReparacionByFechaInicio(LocalDateTime fechaInicio){
         
     }
@@ -64,6 +76,10 @@ public class ReparacionesDao {
     }
 
     public void mostrarReparacionByFechaReciente(LocalDateTime fechaReciente){
+        
+    }
+
+    public void mostrarReparacionByMatricula(String matricula){
         
     }
 
