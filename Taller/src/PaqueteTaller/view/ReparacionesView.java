@@ -22,10 +22,10 @@ public class ReparacionesView {
             opcion=sc.nextInt();
             sc.nextLine();
             switch(opcion){
-                case 1 ->{}
-                case 2 ->{}
-                case 3 ->{}
-                case 4 ->{}
+                case 1 ->{this.crearReparacion();}
+                case 2 ->{this.eliminarReparacion();}
+                case 3 ->{this.modificarReparacion();}
+                case 4 ->{this.mostrarReparacion();}
             }
         }while(opcion!=5);
 
@@ -116,16 +116,44 @@ public class ReparacionesView {
         int idReparacion=sc.nextInt();
         reparacionDao.eliminarReparacion(idReparacion);
     }
+
+    public void mostrarReparacion(){
+        System.out.println("¿Cómo desea ver la reparación?");
+        System.out.println("1. Ver todas");
+        System.out.println("1. Por ID");
+        System.out.println("1. Por ID");
+    }
+
     public void mostrarReparacionById(){
         int idReparacion;
         System.out.println("Introduce el ID");
         idReparacion = sc.nextInt();
         sc.nextLine();
         reparacionDao.mostrarReparacionById(idReparacion);
-
-
-
     }
+    public void mostrarReparacionByFechaInicio(){
+        LocalDateTime fechaInicio;
+        System.out.println("Introduce la fecha");
+        fechaInicio = this.introducirFecha();
+        sc.nextLine();
+        reparacionDao.mostrarReparacionByFechaInicio(fechaInicio);
+    }
+    public void mostrarReparacionByFechaFinal(){
+        LocalDateTime fechaFinal;
+        System.out.println("Introduce la fecha");
+        fechaFinal = this.introducirFecha();
+        sc.nextLine();
+        reparacionDao.mostrarReparacionByFechaFinal(fechaFinal);
+    }
+    public void mostrarReparacionByMasRecientes(){
+        LocalDateTime fechaInicio;
+        System.out.println("Introduce la fecha más reciente");
+        fechaInicio = this.introducirFecha();
+        sc.nextLine();
+        reparacionDao.mostrarReparacionByFechaReciente(fechaInicio);
+    }
+
+
     public void modificarReparacion(){
         String nombreReparacion;
         int opcion;

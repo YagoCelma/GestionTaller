@@ -19,7 +19,7 @@ public class ReparacionesDao {
     }
 
     //sets
-    
+
     public void setNombreReparacion(int idReparacion, String nombreReparacion){
 
     }
@@ -54,6 +54,19 @@ public class ReparacionesDao {
     public void añadirProducto(String producto, int cantidad, Double precio, int reparacionId){
 
     }
+
+    public void mostrarReparacionByFechaInicio(LocalDateTime fechaInicio){
+        
+    }
+
+    public void mostrarReparacionByFechaFinal(LocalDateTime fechaFinal){
+        
+    }
+
+    public void mostrarReparacionByFechaReciente(LocalDateTime fechaReciente){
+        
+    }
+
 
     //gets
     public int getIdReparacion(){
