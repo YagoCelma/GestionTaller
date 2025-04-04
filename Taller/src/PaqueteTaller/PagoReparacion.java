@@ -3,7 +3,7 @@ import PaqueteTaller.DAO.PagosDao;
 import java.time.LocalDateTime;
 
 
-public class Pago {
+public class PagoReparacion {
 
     PagosDao pagosDao = new PagosDao();
 
@@ -16,7 +16,7 @@ public class Pago {
     private Double precioProductos;
     private Double total = null;
 
-    public Pago (String nombreReparacion, LocalDateTime fechaInicio, LocalDateTime fechaFinal, 
+    public PagoReparacion (String nombreReparacion, LocalDateTime fechaInicio, LocalDateTime fechaFinal, 
     Double horas, Double precioHora, Double precioTotal, Double precioProductos){
         this.nombreReparacion = nombreReparacion;
         this.fechaInicio = fechaInicio;

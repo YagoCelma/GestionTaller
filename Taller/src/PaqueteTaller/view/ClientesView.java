@@ -1,7 +1,7 @@
 package PaqueteTaller.view;
-import java.util.Scanner;
-import PaqueteTaller.DAO.ConsultasSQL;
 import PaqueteTaller.Cliente;
+import PaqueteTaller.DAO.ConsultasSQL;
+import java.util.Scanner;
 
 
 public class ClientesView {
@@ -58,8 +58,8 @@ public class ClientesView {
         String direccion = sc.nextLine();
 
         System.out.println("Cuenta Bancaria");
-        int cuentaBancaria = sc.nextInt();
-        sc.nextLine();
+        String cuentaBancaria = sc.nextLine();
+        
 
         Cliente cliente = new Cliente(dniCliente, nombre, apellido, telefono, direccion, cuentaBancaria);
 
@@ -130,8 +130,7 @@ public class ClientesView {
                 }
                 case 5 ->{
                     System.out.println("Introduzca la nueva cuenta bancaria");
-                    int cuentaBancaria= sc.nextInt();
-                    sc.nextLine();
+                    String cuentaBancaria= sc.nextLine();
                     cliente.setCuentaBancaria(cuentaBancaria);
                 }
                 case 6 -> {

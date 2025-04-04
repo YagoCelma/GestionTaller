@@ -1,7 +1,7 @@
 package PaqueteTaller.view;
 import PaqueteTaller.DAO.PagosDao;
 import PaqueteTaller.DAO.ReparacionesDao;
-import PaqueteTaller.Pago;
+import PaqueteTaller.PagoReparacion;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -11,7 +11,7 @@ public class PagosView {
     Scanner sc = new Scanner(System.in);
     PagosDao pagosDao = new PagosDao();
     ReparacionesDao reparacionDao= new ReparacionesDao();
-    Pago pagoReparacion;
+    PagoReparacion pagoReparacion;
 
     public void menuPagos(){
         int opcion;
@@ -40,7 +40,7 @@ public class PagosView {
         String nombreReparacion;
         Double horas;
         LinkedList <Integer> idsReparacion = new LinkedList<>();
-        LinkedList <Pago> pagoReparacion = new LinkedList<>();
+        LinkedList <PagoReparacion> pagoReparacion = new LinkedList<>();
 
         do{
         System.out.println("Introduce el ID de la reparación");
@@ -81,7 +81,7 @@ public class PagosView {
 
 
 
-            pagoReparacion.add(new Pago(nombreReparacion,fechaInicio, fechaFinal, horas, precioHora, precioReparacion,precioProductos));
+            pagoReparacion.add(new PagoReparacion(nombreReparacion,fechaInicio, fechaFinal, horas, precioHora, precioReparacion,precioProductos));
 
             
             //pagosDao.precioHoras(idsReparacion.get(idReparacion));
@@ -92,7 +92,7 @@ public class PagosView {
         }
 
         for (int i=0; i < pagoReparacion.size(); i++){
-            Pago pagoTotal = pagoReparacion.get(i);
+            PagoReparacion pagoTotal = pagoReparacion.get(i);
             pagoTotal.toString();
             precioSubtotal = precioSubtotal + pagoTotal.getTotal();
 
