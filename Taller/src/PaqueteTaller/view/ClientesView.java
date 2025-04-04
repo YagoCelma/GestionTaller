@@ -1,5 +1,5 @@
 package PaqueteTaller.view;
-import PaqueteTaller.Cliente;
+import PaqueteTaller.model.Cliente;
 import PaqueteTaller.DAO.ConsultasSQL;
 import java.util.Scanner;
 

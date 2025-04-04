@@ -1,3 +1,5 @@
+package PaqueteTaller.model;
+
 import java.time.*;
 import java.util.ArrayList;
 import java.util.HashMap;

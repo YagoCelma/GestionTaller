@@ -1,5 +1,5 @@
 package PaqueteTaller.DAO;
-import PaqueteTaller.Cliente;
+import PaqueteTaller.model.Cliente;
 
 public class ConsultasSQL {
 

@@ -1,4 +1,4 @@
-package PaqueteTaller;
+package PaqueteTaller.model;
 import PaqueteTaller.DAO.PagosDao;
 import java.time.LocalDateTime;
 
@@ -29,7 +29,7 @@ public class PagoReparacion {
     }
 
     public Double getTotal (){
-        Double total= null;
+        Double total=null;
         return total;
     }
 

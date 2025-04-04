@@ -1,4 +1,4 @@
-package PaqueteTaller;
+package PaqueteTaller.model;
 import PaqueteTaller.view.CitasView;
 import PaqueteTaller.view.ClientesView;
 import java.util.Scanner;
@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class App {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
-        Taller taller = new Taller();
+        
         ClientesView clienteView = new ClientesView();
         CitasView citasView = new CitasView();
 

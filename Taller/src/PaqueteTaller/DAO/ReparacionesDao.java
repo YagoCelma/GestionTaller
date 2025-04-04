@@ -1,5 +1,5 @@
 package PaqueteTaller.DAO;
-import PaqueteTaller.Reparaciones;
+import PaqueteTaller.model.Reparaciones;
 import java.time.*;
 
 public class ReparacionesDao {

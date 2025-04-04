@@ -1,3 +1,6 @@
+package PaqueteTaller.model;
+
+
 public class Inventario {
     private String nombre;
     private Double cantidad;

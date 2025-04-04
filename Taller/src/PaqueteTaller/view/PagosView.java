@@ -1,7 +1,7 @@
 package PaqueteTaller.view;
 import PaqueteTaller.DAO.PagosDao;
 import PaqueteTaller.DAO.ReparacionesDao;
-import PaqueteTaller.PagoReparacion;
+import PaqueteTaller.model.PagoReparacion;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.Scanner;

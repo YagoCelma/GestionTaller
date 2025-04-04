@@ -1,4 +1,4 @@
-package PaqueteTaller;
+package PaqueteTaller.model;
 
 public class Cliente {
 

@@ -1,6 +1,6 @@
 package PaqueteTaller.view;
-import PaqueteTaller.Citas;
 import PaqueteTaller.DAO.CitasDao;
+import PaqueteTaller.model.Citas;
 import java.time.LocalDateTime;
 import java.util.Scanner;
 public class CitasView {

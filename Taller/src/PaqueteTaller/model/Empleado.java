@@ -1,3 +1,4 @@
+package PaqueteTaller.model;
 public class Empleado {
 
     private String ID;
