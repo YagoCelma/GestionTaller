@@ -6,17 +6,16 @@ public class Coche {
     private String modelo;
     private int año;
     private String DNI_Cliente;
-    private boolean estado;
+    
 
     //Constructor
-    public Coche(String matricula, String marca, String modelo, int año, String DNI_Cliente, boolean estado ){
+    public Coche(String matricula, String marca, String modelo, int año, String DNI_Cliente){
 
         this.matricula = matricula;
         this.marca = marca;
         this.modelo = modelo;
         this.año = año;
         this.DNI_Cliente = DNI_Cliente;
-        this.estado = estado;
     }
 
     //Gets y Sets

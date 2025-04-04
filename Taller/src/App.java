@@ -13,6 +13,7 @@ public class App {
             System.out.println("2. Coche");
             System.out.println("3. Citas");
             System.out.println("4. Pedidos");
+            System.out.println("5. Empleado");
             opcion = sc.nextInt();
             sc.nextLine();
 
