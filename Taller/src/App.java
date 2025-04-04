@@ -1,4 +1,6 @@
 import java.util.Scanner;
+
+import dao.ConexionBD;
 import view.CocheView;
 import view.EmpleadoView;
 import view.InventarioView;
@@ -7,10 +9,16 @@ public class App {
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
 
+        ConexionBD conexion = new ConexionBD();
         CocheView cocheView = new CocheView();
         EmpleadoView empleadoView = new EmpleadoView();
         InventarioView inventarioView = new InventarioView();
 
+        if(conexion != null){
+            System.out.println("Conexión establecida correctamente.");
+        }else{
+            System.out.println("No se pudo establecer la conexión.");
+        }
         int opcion;
         
         do{
@@ -46,11 +54,18 @@ public class App {
                     break;
                 }
                 case 6:{
-                    
+
+                }
+                case 7:{
+                    System.out.println("Saliendo del programa...");
+                    break;
+                }
+                default:{
+                    System.out.println("Opcion no válida, intentelo de nuevo");
                 }
             }
 
-        }while(opcion != 6);
+        }while(opcion != 7);
 
     }
 }

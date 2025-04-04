@@ -10,6 +10,10 @@ public class EmpleadoView {
     private Connection conexion;
     private EmpleadoDAO empleadoDAO;
 
+    public EmpleadoView() {
+        this.empleadoDAO = new EmpleadoDAO();
+    }
+
     public void menuEmpleado(){
 
         int opcion;
@@ -40,7 +44,7 @@ public class EmpleadoView {
         id = sc.nextInt();
         sc.nextLine();
         idRepetido = empleadoDAO.idRepetido(id);
-       } while(idRepetido = true);
+       } while(idRepetido = false);
 
        System.out.println("Nombre del empleado");
        String nombre = sc.nextLine();

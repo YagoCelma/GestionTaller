@@ -1,5 +1,7 @@
 package model;
 
+import dao.CocheDAO;
+
 public class Coche {
 
     private String matricula;
@@ -17,6 +19,10 @@ public class Coche {
         this.modelo = modelo;
         this.año = año;
         this.DNI_Cliente = DNI_Cliente;
+    }
+
+    public Coche(){
+        
     }
 
     //Gets y Sets

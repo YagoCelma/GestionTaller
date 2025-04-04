@@ -15,6 +15,9 @@ CREATE TABLE Empleados(
 );
 
 CREATE TABLE Inventario(
-
+    ID_Producto INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(40) NOT NULL,
+    cantidad INT NOT NULL,
+    precio DECIMAL(10, 2) NOT NULL,
 );
 

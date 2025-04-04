@@ -9,8 +9,7 @@ public class EmpleadoDAO {
     private Connection conexion;
 
     // Constructor que recibe la conexión
-    public EmpleadoDAO(Connection conexion) {
-        this.conexion = conexion;
+    public EmpleadoDAO() {
     }
 
     public boolean idRepetido(int id){

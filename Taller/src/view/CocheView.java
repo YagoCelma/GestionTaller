@@ -2,6 +2,7 @@ package view;
 
 import model.Coche;
 import dao.CocheDAO;
+import dao.ConexionBD;
 
 import java.sql.Connection;
 import java.util.Scanner;
@@ -11,7 +12,12 @@ public class CocheView {
 
     private Scanner sc = new Scanner(System.in);
     private CocheDAO cocheDAO;
+    private ConexionBD conexion = new ConexionBD();
 
+
+    public CocheView() {
+        this.cocheDAO = new CocheDAO();
+    }
     
     public void menuCoche(){
 

@@ -8,8 +8,7 @@ public class CocheDAO {
     private Connection conexion;
 
     // Constructor que recibe la conexión
-    public CocheDAO(Connection conexion) {
-        this.conexion = conexion;
+    public CocheDAO() {
     }
 
     public void añadirCoche(String matricula, String marca, String modelo, int año, String dni_cliente) {

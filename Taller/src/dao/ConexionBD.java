@@ -15,10 +15,10 @@ public class ConexionBD {
 
     public static Connection conectar() {
     try {
-    // Establecer la conexión con la base de datos
-    return DriverManager.getConnection(ConexionBD.URL, ConexionBD.USUARIO, ConexionBD.CONTRASENA);
+        // Establecer la conexión con la base de datos
+        return DriverManager.getConnection(ConexionBD.URL, ConexionBD.USUARIO, ConexionBD.CONTRASENA);
     } catch (SQLException e) {
-    System.out.println("Error al conectar a la base de datos: " + e.getMessage());
+        System.out.println("Error al conectar a la base de datos: " + e.getMessage());
     return null;
     }
 }
