@@ -5,31 +5,40 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ProductoPedido {
-    ArrayList<Pedidos> pedido= new ArrayList<>();
-    HashMap <Integer, ArrayList<Pedidos>> listaPedidos=new HashMap <>();
+    ArrayList<Pedido> pedido= new ArrayList<>();
+    HashMap <Integer, ArrayList<Pedido>> listaPedidos=new HashMap <>();
     private int codigoProducto;
+    private String codigoPedido;
     private int idProveedor;
     private String nombre;
     private Double precioProducto;
     private Double precioTotal;
     private Double cantidad;
     private LocalDate fechaCompra; //=LocalDate.of(1990, 5, 15);
-    private LocalDate fechaLLegada = null;
+    private LocalDate fechaLlegada = null;
 
-    public ProductoPedido (int codigoProducto, int idProveedor, String nombre, Double precioProducto, Double cantidad, int año, int mes, int dia, int año2, int mes2, int dia2){
+    public ProductoPedido (String codigoPedido, int codigoProducto, int idProveedor, String nombre, Double precioProducto, Double cantidad, LocalDate fechaCompra, LocalDate fechaLlegada){
         this.codigoProducto=codigoProducto;
+        this.codigoPedido=codigoPedido;
         this.idProveedor=idProveedor;
         this.nombre=nombre;
         this.precioProducto=precioProducto;
-        this.fechaCompra = LocalDate.of(año, mes, dia);
-        this.fechaLLegada = LocalDate.of(año2, mes2, dia2);
+        this.fechaCompra = fechaCompra;
+        this.fechaLlegada = fechaLlegada;
         this.precioTotal= precioProducto * cantidad;
     }
-    public Double precioTotal (ArrayList <Pedidos> pedidos){
-        for (ArrayList pedido: pedidos){
-            
-        }
 
+    public ProductoPedido(){
+        
+    }
+    public Double precioTotal(ArrayList<Pedido> pedidos) {
+        Double total = 0.0;
+        
+        for (Pedido pedido : pedidos) {
+            total += pedido.getPrecio(); // Asumiendo que la clase Pedido tiene un método getPrecio()
+        }
+        
+        return total;
     }
 
 
