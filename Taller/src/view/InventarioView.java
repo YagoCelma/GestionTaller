@@ -1,13 +1,15 @@
 package view;
 
 import java.util.*;
-
+import model.Inventario;
 import dao.InventarioDAO;
 
 public class InventarioView {
 
     private Scanner sc = new Scanner(System.in);
     private InventarioDAO inventarioDAO = new InventarioDAO();
+    private Inventario inventario;
+
 
     public void menuInventario(){
 
@@ -29,14 +31,8 @@ public class InventarioView {
                     int numeroProducto = validarEntradaProducto();
                     mostrarProducto(numeroProducto);
                 }
-                case 3->{
-                    int numeroProducto = validarEntradaProducto();
-                    inventarioDAO.modificarProducto(numeroProducto);
-                }
-                case 4->{
-                    int numeroProducto = validarEntradaProducto();
-                    inventarioDAO.eliminarProducto(numeroProducto);
-                }
+                case 3-> modificarProducto();
+                case 4-> borrarProducto();
                 case 5-> inventarioDAO.listarInventario();
                 case 6-> System.out.println("Saliendo del menú de modificación.");
                 default-> System.out.println("No se ha seleccionado una opcion válida");
@@ -91,7 +87,7 @@ public class InventarioView {
             System.out.println("Indique el numero de producto");
             numeroProducto = sc.nextInt();
             sc.nextLine();
-            productoEncontrado = inventarioDAO.productoEncontrado(numeroProducto);
+            productoEncontrado = inventarioDAO.numeroRepetido(numeroProducto);
 
             if(productoEncontrado == true){
                 condicion = false;
@@ -104,9 +100,28 @@ public class InventarioView {
         inventarioDAO.eliminarProducto(numeroProducto);
         System.out.println("Producto eliminado con exito");
     }
-    public void modificarProducto(){ //Hay que terminarlo, falta poner le menu de lo que quieres modificar y el switch
+    public void modificarProducto(){
 
+        boolean condicion = false;
+        int numeroProducto;
+        boolean numeroRepetido;
         int opcion;
+
+        System.out.println("Introduzca el numero del producto");
+
+        do{
+            numeroProducto = sc.nextInt();
+            sc.nextLine();
+            numeroRepetido = inventarioDAO.numeroRepetido(numeroProducto);
+
+            if(numeroRepetido = true){
+                condicion = true;
+            }else{
+                System.out.println("Error: Numero de producto no encontrado");
+            }
+        }while(condicion == false);
+
+        Inventario inventario = inventarioDAO.productoPorID(numeroProducto);
 
         do{
             System.out.println("Que quieres modificar?");
@@ -126,7 +141,28 @@ public class InventarioView {
                     inventario.setNumeroProducto(nuevoID);
                     System.out.println("ID del producto modificado con exito");
                 }
-
+                case 2->{
+                    System.out.println("Indique el nuevo nombre del producto");
+                    String nuevoNombre = sc.nextLine();
+                    inventario.setNombreObjeto(nuevoNombre);
+                    System.out.println("Nombre del producto modificado con exito");
+                }
+                case 3->{
+                    System.out.println("Indique la nueva cantidad del producto");
+                    int nuevaCantidad = sc.nextInt();
+                    sc.nextLine();
+                    inventario.setCantidad(nuevaCantidad);
+                    System.out.println("Cantidad del producto modificada con exito");
+                }
+                case 4->{
+                    System.out.println("Indique el nuevo precio del producto");
+                    double nuevoPrecio = sc.nextDouble();
+                    sc.nextLine();
+                    inventario.setPrecio(nuevoPrecio);
+                    System.out.println("Precio del producto modificado con exito");
+                }
+                case 5-> System.out.println("Saliendo del menú de modificación.");
+                default-> System.out.println("No se ha seleccionado una opcion válida");
             }
         }while(opcion != 5);
 
@@ -147,7 +183,7 @@ public class InventarioView {
             System.out.println("Indique el numero de producto");
             numeroProducto = sc.nextInt();
             sc.nextLine();
-            productoEncontrado = inventarioDAO.productoEncontrado(numeroProducto);
+            productoEncontrado = inventarioDAO.numeroRepetido(numeroProducto);
     
             if (productoEncontrado == true) {
                 return numeroProducto;
@@ -157,7 +193,16 @@ public class InventarioView {
         } while (true);
     }
 
-    public void mostrarProducto(int numeroProducto){
-        
+    private void mostrarProducto(int numeroProducto) {
+        Inventario inventario = inventarioDAO.productoPorID(numeroProducto);
+        if (inventario != null) {
+            System.out.println("Información del producto:");
+            System.out.println("ID: " + inventario.getNumeroProducto());
+            System.out.println("Nombre: " + inventario.getNombreObjeto());
+            System.out.println("Precio: " + inventario.getPrecio());
+            System.out.println("Cantidad en stock: " + inventario.getCantidad());
+        } else {
+            System.out.println("No se encontró ningún producto con el ID " + numeroProducto);
+        }
     }
 }

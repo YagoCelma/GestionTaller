@@ -14,6 +14,11 @@ public class Inventario {
         this.precio = precio;
     }
 
+    public Inventario(){
+        
+    }
+
+
     public int getNumeroProducto() {return numeroProducto;}
     public void setNumeroProducto(int numeroProducto) {this.numeroProducto = numeroProducto;}
 

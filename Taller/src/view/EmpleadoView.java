@@ -10,11 +10,6 @@ public class EmpleadoView {
     private Connection conexion;
     private EmpleadoDAO empleadoDAO;
 
-    public EmpleadoView(Connection conexion) {
-        this.conexion = conexion;
-        this.empleadoDAO = new EmpleadoDAO(conexion);
-    }
-
     public void menuEmpleado(){
 
         int opcion;
