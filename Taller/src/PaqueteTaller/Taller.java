@@ -1,3 +1,4 @@
+package PaqueteTaller;
 
 import java.util.*;
 
@@ -8,7 +9,7 @@ public class Taller {
 
     //Atributos taller
     ArrayList<Coche> coches = new ArrayList<>();
-    ArrayList<CitasView> citas = new ArrayList<>();
+    ArrayList<Citas> citas = new ArrayList<>();
     ArrayList<Cliente> clientes = new ArrayList<>();
     ArrayList<Empleado> empleados = new ArrayList<>();
 
@@ -369,13 +370,4 @@ public class Taller {
         return null;
     }
 
-
-
-    //Metodos pedidos
-    public void pedidos(){
-        
-    }
-
-
-}   
-
+}

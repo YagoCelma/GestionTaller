@@ -1,5 +1,4 @@
-
-import java.util.ArrayList;
+package PaqueteTaller;
 
 public class Cliente {
 
@@ -8,13 +7,13 @@ public class Cliente {
     private String apellido;
     private int telefono;
     private String direccion;
-    private int cuentaBancaria;
+    private String cuentaBancaria; //Quizas cambiarla a string
 
 
 
 
     //Constructor
-    public Cliente(String DNI, String nombre, String apellido, int telefono, String direccion, int cuentaBancaria){
+    public Cliente(String DNI, String nombre, String apellido, int telefono, String direccion, String cuentaBancaria){
         this.DNI = DNI;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -24,10 +23,13 @@ public class Cliente {
     }
 
     //Get y Set
+    //public Cliente getCliente(String DNI){return this;}
     public String getDNI() {return DNI;}
     public void setDireccion(String direccion) { this.direccion = direccion;}
     public void setTelefono(int telefono) {this.telefono = telefono;}
-    public void setCuentaBancaria(int cuentaBancaria) {this.cuentaBancaria =cuentaBancaria;}
+    public void setNombre(String nombre){this.nombre=nombre;}
+    public void setApellido(String apellido){this.apellido=apellido;}
+    public void setCuentaBancaria(String cuentaBancaria) {this.cuentaBancaria =cuentaBancaria;}
 }
 
 
