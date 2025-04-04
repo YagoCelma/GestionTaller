@@ -90,4 +90,24 @@ public class ReparacionesDao {
         return idReparacion;
     }
 
+    public LocalDateTime getFechaInicioReparacion(int idReparacion){
+        LocalDateTime fecha = null;
+        return fecha;
+    }
+
+    public LocalDateTime getFechaFinalReparacion(int idReparacion){
+        LocalDateTime fecha = null;
+        return fecha;
+    }
+
+    public Double getHoras(int idReparacion){
+        Double horas=null;
+        return horas;
+    }
+
+    public String getNombreReparacion(int idReparacion){
+        String nombreReparacion = "nombre";
+        return nombreReparacion;
+
+    }
 }

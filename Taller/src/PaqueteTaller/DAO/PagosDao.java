@@ -3,7 +3,7 @@ import java.util.LinkedList;
 
 public class PagosDao {
 
-    public void calculaPrecio(LinkedList idsReparaciones){
+    public void calculaPrecio(int idReparaciones){
 
     }
 
