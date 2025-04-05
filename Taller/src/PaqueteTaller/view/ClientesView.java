@@ -1,6 +1,6 @@
 package PaqueteTaller.view;
 import PaqueteTaller.model.Cliente;
-import PaqueteTaller.DAO.ConsultasSQL;
+import PaqueteTaller.DAO.ClienteDao;
 import java.util.Scanner;
 
 
@@ -8,7 +8,7 @@ public class ClientesView {
 
     Scanner sc = new Scanner (System.in);
 
-    ConsultasSQL consulta = new ConsultasSQL();
+    ClienteDao clienteDao = new ClienteDao();
 
     
     
@@ -38,8 +38,8 @@ public class ClientesView {
         do{
             System.out.println("Introduzca el DNI del cliente");
             dniCliente = sc.nextLine();
-            dniRepetido = consulta.dniRepetido(dniCliente);
- 
+            dniRepetido = clienteDao.dniRepetido(dniCliente);
+            
         }while(dniRepetido == true);
 
         
@@ -51,21 +51,22 @@ public class ClientesView {
         String apellido = sc.nextLine();
 
         System.out.println("Numero de telefono:");
-        int telefono = sc.nextInt();
-        sc.nextLine();
+        int telefono = Integer.parseInt(sc.nextLine()); 
 
         System.out.println("Direccion del cliente:");
         String direccion = sc.nextLine();
 
         System.out.println("Cuenta Bancaria");
         String cuentaBancaria = sc.nextLine();
+        System.out.println("Email");
+        String email = sc.nextLine();
         
 
-        Cliente cliente = new Cliente(dniCliente, nombre, apellido, telefono, direccion, cuentaBancaria);
+        Cliente cliente = new Cliente(dniCliente, nombre, apellido, telefono, direccion, cuentaBancaria, email);
 
-        consulta.insertarCliente(cliente);
+        clienteDao.insertarCliente(cliente);
         
-        System.out.println("El cliente a sido añadido con exito");
+        //System.out.println("El cliente ha sido añadido con exito");
     }
 
     public void modificarCliente(){
@@ -84,7 +85,7 @@ public class ClientesView {
         while(condicion=false){
 
             dniCliente= sc.nextLine();
-            dniRepetido = consulta.dniRepetido(dniCliente);
+            dniRepetido = clienteDao.dniRepetido(dniCliente);
 
             if (dniRepetido=true){
                 condicion=true;
@@ -93,7 +94,7 @@ public class ClientesView {
             }
         }   
         
-        Cliente cliente = consulta.getClienteByDni(dniCliente);
+        Cliente cliente = clienteDao.getClienteByDni(dniCliente);
 
         do{
             System.out.println("Escriba el número de lo que desea cambiar:");
@@ -141,7 +142,7 @@ public class ClientesView {
                     subOpcion= sc.nextInt();
                     sc.nextLine();
                     switch (subOpcion) {
-                     case 1 -> consulta.modificarCliente(cliente);
+                     case 1 -> clienteDao.modificarCliente(cliente);
                      case 2 -> {} 
                     }
 
@@ -158,23 +159,32 @@ public class ClientesView {
 
         boolean condicion= false;
         boolean dniRepetido;
-        String dniCliente=null;
+        String dniCliente ;
         
         System.out.println("Introduzca el DNI:");
-
-        while(condicion=false){
+        dniCliente= sc.nextLine();
+        System.out.println("Check");
+        dniRepetido = clienteDao.dniRepetido(dniCliente);
+        if (dniRepetido=true){
+            condicion=true;
+        } else{
+            do{
+            System.out.println("Error: DNI no encontrado, vuelva a introducirlo");
             dniCliente= sc.nextLine();
-            dniRepetido = consulta.dniRepetido(dniCliente);
+            dniRepetido = clienteDao.dniRepetido(dniCliente);
             if (dniRepetido=true){
-                condicion=true;
-            } else{
-                System.out.println("Error: DNI no encontrado, vuelva a introducirlo");
+            condicion=true;
             }
-        }  
-        consulta.eliminarCliente(dniCliente);
+        }while(condicion=false);
+            
+           
+           
+         
+        clienteDao.eliminarCliente(dniCliente);
         System.out.println("Cliente eliminado");
 
+        }
     }
-
 }
+
 

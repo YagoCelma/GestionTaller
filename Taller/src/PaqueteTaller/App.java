@@ -1,6 +1,9 @@
-package PaqueteTaller.model;
-import PaqueteTaller.view.CitasView;
-import PaqueteTaller.view.ClientesView;
+package PaqueteTaller;
+
+import PaqueteTaller.view.*;
+import PaqueteTaller.model.*;
+
+
 import java.util.Scanner;
 
 public class App {
@@ -9,6 +12,11 @@ public class App {
         
         ClientesView clienteView = new ClientesView();
         CitasView citasView = new CitasView();
+        CocheView cocheView = new CocheView();
+        EmpleadoView emlpeadoView = new EmpleadoView();
+        ReparacionesView reparacionView = new ReparacionesView();
+        PagosView pagosView = new PagosView();
+
 
         int opcion;
 
@@ -29,8 +37,13 @@ public class App {
 
             switch(opcion){
                 case 1-> clienteView.menuCliente();
-
+                case 2 -> cocheView.menuCoche();
                 case 3 -> citasView.menuCitas();
+                case 4 -> emlpeadoView.menuEmpleado();
+                case 5 -> reparacionView.menuReparaciones();
+                case 6 -> {}
+                case 7 -> {}
+                case 8 -> pagosView.menuPagos();
             }
         }while(opcion != 5);
     }

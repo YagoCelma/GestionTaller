@@ -1,4 +1,4 @@
-package PaqueteTaller.model;
+/*package PaqueteTaller.model;
 
 import java.time.*;
 import java.util.ArrayList;
@@ -44,3 +44,4 @@ public class ProductoPedido {
 
 
 }
+*/

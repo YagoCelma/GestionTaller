@@ -19,7 +19,26 @@ public class Coche {
         this.DNI_Cliente = DNI_Cliente;
     }
 
+    
+    public Coche(){
+        
+    }
+
     //Gets y Sets
     public String getMatricula(){return matricula;}
+    public void setMatricula(String matricula){this.matricula = matricula;}
+
+    public String getMarca(){return marca;}
+    public void setMarca(String marca){this.marca = marca;}
+    
+    public String getModelo(){return modelo;}
+    public void setModelo(String modelo){this.modelo = modelo;}
+    
+    public int getAño(){return año;}
+    public void setAño(int año){this.año = año;}
+    
+    public String getDNI_Cliente(){return DNI_Cliente;}
+    public void setDNI_Cliente(String DNI_Cliente){this.DNI_Cliente = DNI_Cliente;}
     
 }
+

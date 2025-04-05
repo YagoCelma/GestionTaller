@@ -1,4 +1,4 @@
-package PaqueteTaller.model;
+/*package PaqueteTaller.model;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -91,3 +91,4 @@ public class Pedido {
         return fecha;
     }    
 }
+*/

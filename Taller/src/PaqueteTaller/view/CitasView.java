@@ -23,10 +23,12 @@ public class CitasView {
             System.out.println("5. Salir");
             opcion=sc.nextInt();
             sc.nextLine();
-            this.crearCita();
-            this.eliminarCita();
-            this.modificarCita();
-            this.verCitas();
+            switch(opcion){
+            case 1 -> {this.crearCita();}
+            case 2 -> {this.eliminarCita();}
+            case 3 -> {this.modificarCita();}
+            case 4 -> {this.verCitas();}
+            }
         }while(opcion!=5);
     }
 
