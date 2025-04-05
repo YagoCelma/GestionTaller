@@ -16,6 +16,7 @@ public class App {
         EmpleadoView emlpeadoView = new EmpleadoView();
         ReparacionesView reparacionView = new ReparacionesView();
         PagosView pagosView = new PagosView();
+        InventarioView inventarioView = new InventarioView();
 
 
         int opcion;
@@ -42,7 +43,7 @@ public class App {
                 case 4 -> emlpeadoView.menuEmpleado();
                 case 5 -> reparacionView.menuReparaciones();
                 case 6 -> {}
-                case 7 -> {}
+                case 7 -> inventarioView.menuInventario();
                 case 8 -> pagosView.menuPagos();
             }
         }while(opcion != 5);

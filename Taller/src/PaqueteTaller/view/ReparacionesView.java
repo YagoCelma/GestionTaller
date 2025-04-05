@@ -42,12 +42,29 @@ public class ReparacionesView {
         LocalDateTime fechaFinal= null;
         boolean acabado= false;
         Double horas= null;
+        boolean seguir;
+        boolean condicion;
+        int idReparacion;
 
         System.out.println("Introduce los siguientes datos");
+
+        do{
+            System.out.println("ID de la reparación");
+            idReparacion=sc.nextInt();
+            sc.nextLine();
+
+            seguir = reparacionDao.comprobarReparacion(idReparacion);
+            if (seguir){
+                System.out.println("El ID ya existe, introduce otro");
+                condicion = true;
+            }else{
+                condicion = false;
+            }
+        }while(condicion == true);
+
         System.out.println("Nombre de la reparación");
         nombreReparacion = sc.nextLine();
 
-        sc.nextLine();
         System.out.println("Citas filtradas por matrícula, elige el ID de la indicada e introdúcelo");
         citas.verCitasMatricula();
         idCita=sc.nextInt();
@@ -59,12 +76,12 @@ public class ReparacionesView {
         System.out.println("1. Sí");
         System.out.println("2. No");
         opcion=sc.nextInt();
+        sc.nextLine();
         if(opcion==1){
             System.out.println("Introduce horas");
             horas=sc.nextDouble();
             sc.nextLine();
         }
-
         
         System.out.println("Fecha de inicio");
         fechaInicio=this.introducirFecha();
@@ -86,7 +103,7 @@ public class ReparacionesView {
         }
 
 
-        Reparaciones reparacion= new Reparaciones(nombreReparacion, fechaInicio, fechaFinal, asunto, acabado, horas, idCita );
+        Reparaciones reparacion= new Reparaciones(idReparacion, nombreReparacion, fechaInicio, fechaFinal, asunto, acabado, horas, idCita );
 
         reparacionDao.crearReparacion(reparacion);
 
