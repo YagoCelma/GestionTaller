@@ -222,7 +222,6 @@ public class CitasView {
                         System.out.println("Escribe la nueva matricula");
                         matricula=sc.nextLine();
                         citasDao.modificarCitaMatricula(id, matricula);
-                        System.out.println("¡Modificado!");
                     }
                     case 2 -> {
                         System.out.println("Escribe la nueva fecha");
@@ -244,19 +243,16 @@ public class CitasView {
                         fecha=LocalDateTime.of(año, mes, dia, hora, minuto);
                         
                         citasDao.modificarCitaFecha(id, fecha);
-                        System.out.println("¡Modificado!");
                     }
                     case 3 -> {
                         System.out.println("Escribe el nuevo DNI");
                         dni=sc.nextLine();
                         citasDao.modificarCitaDni(id, dni);
-                        System.out.println("¡Modificado!");
                     }
                     case 4 -> {
                         System.out.println("Escribe el nuevo asunto");
                         asunto=sc.nextLine();
                         citasDao.modificarCitaAsunto(id, asunto);
-                        System.out.println("¡Modificado!");
                     }
 
                 }

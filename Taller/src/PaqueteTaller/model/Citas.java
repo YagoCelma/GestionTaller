@@ -17,12 +17,23 @@ public class Citas {
         this.fechaCita = fechaCita;
         this.DNI_Cliente = DNI_Cliente;
         this.matricula=matricula;
-        this.acudido=false;
+        this.acudido = false;
     }
 
-    //Get y Set
-    public void setAcudido(){
-        this.acudido=true;
-    }
+
+        public LocalDateTime getFechaCita() { return fechaCita; }
+        public void setFechaCita(LocalDateTime fechaCita) { this.fechaCita = fechaCita; }
+
+        public String getDNI_Cliente() { return DNI_Cliente; }
+        public void setDNI_Cliente(String DNI_Cliente) { this.DNI_Cliente = DNI_Cliente; }
+
+        public String getAsunto() { return asunto; }
+        public void setAsunto(String asunto) { this.asunto = asunto; }
+
+        public String getMatricula() { return matricula; }
+        public void setMatricula(String matricula) { this.matricula = matricula; }
+        
+        public boolean getAcudido() { return acudido; }
+        public void setAcudido(boolean acudido) { this.acudido = true; }
 
 }

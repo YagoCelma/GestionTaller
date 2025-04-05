@@ -37,7 +37,7 @@ public class Reparaciones {
     public LocalDateTime getFechaFinal() {return fechaFinal;}
     public void setFechaFinal(LocalDateTime fechaFinal) {this.fechaFinal = fechaFinal;}
 
-    public boolean isAcabado() {return acabado;}
+    public boolean getAcabado() {return acabado;}
     public void setAcabado(boolean acabado) {this.acabado = acabado;}
 
     public String getAsunto() {return asunto;}

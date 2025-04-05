@@ -19,7 +19,7 @@ public class ReparacionesDao {
                 stmt.setInt(2, reparacion.getIdCita());
                 stmt.setObject(3, reparacion.getFechaInicio(), java.sql.Types.TIMESTAMP);
                 stmt.setObject(4, reparacion.getFechaFinal(), java.sql.Types.TIMESTAMP);
-                stmt.setBoolean(5, reparacion.isAcabado());
+                stmt.setBoolean(5, reparacion.getAcabado());
                 stmt.setDouble(6, reparacion.getHoras());
                 stmt.setString(7, reparacion.getAsunto());
 
