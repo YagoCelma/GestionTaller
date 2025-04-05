@@ -34,6 +34,7 @@ public class EmpleadoView {
                 case 1-> añadirEmpleado();
                 case 2-> borrarEmpleado();
                 case 3-> modificarEmpleado();
+                default -> System.out.println("Opción no válida");
             }
         }while(opcion != 4);
     }

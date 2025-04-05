@@ -21,6 +21,7 @@ public class CitasView {
             System.out.println("3. Modificar cita");
             System.out.println("4. Ver citas");
             System.out.println("5. Salir");
+            
             opcion=sc.nextInt();
             sc.nextLine();
             switch(opcion){
@@ -28,6 +29,7 @@ public class CitasView {
             case 2 -> {this.eliminarCita();}
             case 3 -> {this.modificarCita();}
             case 4 -> {this.verCitas();}
+            default -> System.out.println("Opción no válida");
             }
         }while(opcion!=5);
     }

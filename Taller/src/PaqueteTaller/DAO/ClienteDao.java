@@ -1,6 +1,8 @@
 package PaqueteTaller.DAO;
 //import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import PaqueteTaller.model.Cliente;
 
@@ -18,7 +20,7 @@ public class ClienteDao{
             pstmt.setString(1, cliente.getDNI());
             pstmt.setString(2, cliente.getNombre());
             pstmt.setString(3, cliente.getApellido());
-            pstmt.setInt(4, cliente.getTelefono());
+            pstmt.setString(4, cliente.getTelefono());
             pstmt.setString(5, cliente.getDireccion());
             pstmt.setString(6, cliente.getEmail());
             pstmt.setString(7, cliente.getCuentaBancaria());
@@ -58,8 +60,54 @@ public class ClienteDao{
 
 
 
-    public void modificarCliente (Cliente cliente){
-
+        public void modificarCliente(Cliente cliente) {
+        StringBuilder query = new StringBuilder("UPDATE clientes SET ");
+        List<Object> params = new ArrayList<>();
+        
+        if (cliente.getNombre() != null) {
+            query.append("Nombre = ?, ");
+            params.add(cliente.getNombre());
+        }
+        if (cliente.getApellido() != null) {
+            query.append("Apellido = ?, ");
+            params.add(cliente.getApellido());
+        }
+        if (cliente.getTelefono() != null) {
+            query.append("Telefono = ?, ");
+            params.add(cliente.getTelefono());
+        }
+        if (cliente.getDireccion() != null) {
+            query.append("Direccion = ?, ");
+            params.add(cliente.getDireccion());
+        }
+        if (cliente.getEmail() != null) {
+            query.append("Email = ?, ");
+            params.add(cliente.getEmail());
+        }
+        if (cliente.getCuentaBancaria() != null) {
+            query.append("Cuenta_bancaria = ?, ");
+            params.add(cliente.getCuentaBancaria());
+        }
+        
+        // Sirve para eliminar la ultima coma y espacio
+        query.delete(query.length() - 2, query.length());
+        
+        query.append(" WHERE DNI = ?");
+        params.add(cliente.getDNI());
+        
+        try (Connection conn = ConexionBD.conectar();
+            PreparedStatement pstmt = conn.prepareStatement(query.toString())) {
+            
+            for (int i = 0; i < params.size(); i++) {
+                pstmt.setObject(i + 1, params.get(i));
+            }
+            
+            int rowsAffected = pstmt.executeUpdate();
+            System.out.println(rowsAffected + " fila(s) actualizada(s)");
+        } catch (SQLException e) {
+            System.out.println("Error al modificar cliente");
+            e.printStackTrace();
+        }
     }
 
 
@@ -88,11 +136,34 @@ public class ClienteDao{
 
     
         
-    public Cliente getClienteByDni(String dni){
-       // Cliente cliente = new Cliente();
+    public void verClienteByDni(String dni){
+       
+            String query = "SELECT * FROM clientes WHERE DNI = ?";
+            
+            try (Connection conn = ConexionBD.conectar();
+                 PreparedStatement pstmt = conn.prepareStatement(query)) {
+                
+                pstmt.setString(1, dni);
+                ResultSet rs = pstmt.executeQuery();
+                
+                if (rs.next()) {
+                    System.out.println("\nDATOS DEL CLIENTE:\n");
+                    System.out.println("DNI: " + rs.getString("DNI"));
+                    System.out.println("Nombre: " + rs.getString("Nombre"));
+                    System.out.println("Apellido: " + rs.getString("Apellido"));
+                    System.out.println("Teléfono: " + rs.getString("Telefono"));
+                    System.out.println("Dirección: " + rs.getString("Direccion"));
+                    System.out.println("Email: " + rs.getString("Email"));
+                    System.out.println("Cuenta Bancaria: " + rs.getString("Cuenta_bancaria"));
+                    System.out.println("-------------------------\n");
+                } else {
+                    System.out.println("Error: No se encontró ningún cliente con ese DNI" );
+                }
+            } catch (SQLException e) {
+                System.out.println("Error al buscar cliente");
+                e.printStackTrace();
+            }
         
-        //hacer los selects
-        return null;
     }
 
 }

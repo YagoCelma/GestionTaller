@@ -26,6 +26,7 @@ public class ReparacionesView {
                 case 2 ->{this.eliminarReparacion();}
                 case 3 ->{this.modificarReparacion();}
                 case 4 ->{this.mostrarReparacionMenu();}
+                default -> System.out.println("Opción no válida");
             }
         }while(opcion!=5);
 
@@ -157,6 +158,7 @@ public class ReparacionesView {
                 case 6 -> {this.mostrarReparacionByEmpleado();}
                 case 7 -> {this.mostrarReparacionActiva();}
                 case 8 -> {this.mostrarReparacionByVehiculo();}
+                default -> System.out.println("Opción no válida");
             }
         }while(opcion!=9);   
     }
@@ -328,6 +330,7 @@ public class ReparacionesView {
                 }while(opcion!=2);
 
             }
+            default -> System.out.println("Opción no válida");
         }
         }while(opcion!=11);
 

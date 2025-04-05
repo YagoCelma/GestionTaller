@@ -23,6 +23,7 @@ public class PagosView {
         sc.nextLine();
         switch(opcion){
             case 1 ->{this.facturaServicio();}
+            default -> System.out.println("Opción no válida");
         }
     }
 
