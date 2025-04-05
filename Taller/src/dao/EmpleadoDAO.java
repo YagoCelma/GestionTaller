@@ -6,7 +6,7 @@ import model.Empleado;
 
 public class EmpleadoDAO {
 
-    private Connection conexion;
+    Connection conexion = ConexionBD.conectar();
 
     // Constructor que recibe la conexión
     public EmpleadoDAO() {

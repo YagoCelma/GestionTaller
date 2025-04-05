@@ -5,7 +5,7 @@ import model.Coche;
 
 public class CocheDAO {
 
-    private Connection conexion;
+    Connection conexion = ConexionBD.conectar();
 
     // Constructor que recibe la conexión
     public CocheDAO() {

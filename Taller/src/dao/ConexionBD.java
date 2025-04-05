@@ -14,13 +14,12 @@ public class ConexionBD {
     public  static final String CONTRASENA = "52534019y"; //  Contraseña del usuario de MySQL
 
     public static Connection conectar() {
-    try {
-        // Establecer la conexión con la base de datos
-        return DriverManager.getConnection(ConexionBD.URL, ConexionBD.USUARIO, ConexionBD.CONTRASENA);
-    } catch (SQLException e) {
-        System.out.println("Error al conectar a la base de datos: " + e.getMessage());
-    return null;
+        try{
+            // Establecer la conexión con la base de datos
+            return DriverManager.getConnection(ConexionBD.URL, ConexionBD.USUARIO, ConexionBD.CONTRASENA);
+        }catch (SQLException e){
+            System.out.println("Error al conectar a la base de datos: " + e.getMessage());
+        return null;
+        }
     }
-}
-   
 }

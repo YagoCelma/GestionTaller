@@ -8,7 +8,7 @@ import model.Inventario;
 public class InventarioDAO {
 
     Scanner sc = new Scanner(System.in);
-        private Connection conexion;
+    Connection conexion = ConexionBD.conectar();
 
 
     public void añadirProducto(int numeroProducto, String nombreProducto, int cantidadProducto, double precioProducto){
