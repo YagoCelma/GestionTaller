@@ -12,19 +12,21 @@ public class ReparacionesDao {
     public void crearReparacion(Reparaciones reparacion){
 
         if(conexion != null){
-            String query = "INSERT INTO reparaciones (idReparacion, nombreReparacion, idCita, fechaInicio, fechaFinal, acabado, horas, asunto) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String query = "INSERT INTO Reparaciones ( Nombre_reparacion, Fecha_inicio, Fecha_final, Asunto, Horas, ID_cita, Acabado   ) VALUES (?, ?, ?, ?, ?, ?, ?)";
             try (PreparedStatement stmt = conexion.prepareStatement(query)) {
-                stmt.setInt(1, reparacion.getIdReparacion());
+                
                 stmt.setString(1, reparacion.getNombreReparacion());
-                stmt.setInt(2, reparacion.getIdCita());
-                stmt.setObject(3, reparacion.getFechaInicio(), java.sql.Types.TIMESTAMP);
-                stmt.setObject(4, reparacion.getFechaFinal(), java.sql.Types.TIMESTAMP);
-                stmt.setBoolean(5, reparacion.getAcabado());
-                stmt.setDouble(6, reparacion.getHoras());
-                stmt.setString(7, reparacion.getAsunto());
+                stmt.setObject(2, reparacion.getFechaInicio(), java.sql.Types.TIMESTAMP);
+                stmt.setObject(3, reparacion.getFechaFinal(), java.sql.Types.TIMESTAMP);
+                stmt.setString(4, reparacion.getAsunto());
+                stmt.setDouble(5, reparacion.getHoras());
+                stmt.setInt(6, reparacion.getIdCita());
+                stmt.setBoolean(7, reparacion.getAcabado());
+                
+                
 
                 int rowsAffected = stmt.executeUpdate();
-                System.out.println("Éxito al añadir la reparación");
+                //System.out.println("Éxito al añadir la reparación");
             } catch (Exception e) {
                 System.out.println("Error al añadir la reparación " + e.getMessage());
             }
@@ -36,7 +38,7 @@ public class ReparacionesDao {
     public void eliminarReparacion(int idReparacion){
 
         if(conexion != null){
-            String query = "DELETE FROM reparaciones WHERE idReparacion = ?";
+            String query = "DELETE FROM reparaciones WHERE ID = ?";
             try (PreparedStatement stmt = conexion.prepareStatement(query)) {
                 stmt.setInt(1, idReparacion);
                 int rowsAffected = stmt.executeUpdate();
@@ -244,10 +246,28 @@ public class ReparacionesDao {
     }
 
     //este metodo enlaza en una tabla auxiliar los id de empleados y su id de reparacion
-    public void añadirEmpleado(int idReparacion,int idEmpleados){
+    public void añadirEmpleado(int idReparacion,String idEmpleados){
+            
+            if (conexion != null){
+                String query = "INSERT INTO Empleados_Reparaciones (ID_empleado, ID_reparacion) VALUES (?, ?)";
+                try (PreparedStatement stmt = conexion.prepareStatement(query)) {
+                    stmt.setString(1, idEmpleados);
+                    stmt.setInt(2, idReparacion);
+                    int rowsAffected = stmt.executeUpdate();
+                    if (rowsAffected > 0) {
+                        System.out.println("Empleado añadido correctamente.");
+                    } else {
+                        System.out.println("No se encontró la reparación con el ID especificado.");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Error al añadir el empleado: " + e.getMessage());
+                }
+            }else{
+                System.out.println("Error al conectar a la base de datos");
+            }
         
     }
-    public void eliminarEmpleado(int idReparacion,int idEmpleados){
+    public void eliminarEmpleado(int idReparacion,String idEmpleados){
 
     }
 
@@ -259,18 +279,20 @@ public class ReparacionesDao {
     public void mostrarReparaciones(){
 
         if(conexion != null){
-            String query = "SELECT * FROM reparaciones";
+            String query = "SELECT * FROM Reparaciones";
             try (PreparedStatement stmt = conexion.prepareStatement(query)) {
                 ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
-                    System.out.println("ID Reparación: " + rs.getInt("idReparacion"));
-                    System.out.println("Nombre Reparación: " + rs.getString("nombreReparacion"));
-                    System.out.println("ID Cita: " + rs.getInt("idCita"));
-                    System.out.println("Fecha Inicio: " + rs.getTimestamp("fechaInicio"));
-                    System.out.println("Fecha Final: " + rs.getTimestamp("fechaFinal"));
+                    System.out.println("ID Reparación: " + rs.getInt("ID"));
+                    System.out.println("Nombre Reparación: " + rs.getString("Nombre_reparacion"));
+                    System.out.println("ID_cita: " + rs.getInt("ID_Cita"));
+                    System.out.println("Fecha Inicio: " + rs.getTimestamp("Fecha_inicio"));
+                    System.out.println("Fecha Final: " + rs.getTimestamp("Fecha_final"));
                     System.out.println("Acabado: " + rs.getBoolean("acabado"));
                     System.out.println("Horas: " + rs.getDouble("horas"));
                     System.out.println("Asunto: " + rs.getString("asunto"));
+                    
+                    System.out.println("-------------------------");
                 }
             } catch (Exception e) {
                 System.out.println("Error al mostrar las reparaciones " + e.getMessage());
@@ -280,19 +302,32 @@ public class ReparacionesDao {
         }
     }
 
-    public void mostrarReparacionByTrabajador(int idEmpleado){
+    public void mostrarReparacionByEmpleado(String idEmpleado){
 
         if(conexion != null){
-            String query = "SELECT * FROM reparaciones WHERE idEmpleado = ?";
+            String query = "SELECT e.ID, e.nombre, e.puesto, r.ID AS reparacion_id, r.Nombre_reparacion, " +
+              "r.Fecha_inicio, r.Fecha_final, r.Acabado " +
+              "FROM Empleados e " +
+              "INNER JOIN Empleados_Reparaciones er ON e.ID = er.ID_empleado " +
+              "INNER JOIN Reparaciones r ON er.ID_reparacion = r.ID " +
+              "WHERE er.ID_empleado = ?";
             try (PreparedStatement stmt = conexion.prepareStatement(query)) {
-                stmt.setInt(1, idEmpleado);
+                stmt.setString(1, idEmpleado);
                 ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
-                    System.out.println("ID Reparación: " + rs.getInt("idReparacion"));
-                    System.out.println("Nombre Reparación: " + rs.getString("nombreReparacion"));
-                    System.out.println("ID Cita: " + rs.getInt("idCita"));
+                    System.out.println("ID Empleado: " + rs.getString("ID_empleado"));
+                    System.out.println("Nombre Empleado: " + rs.getString("nombre"));
+                    System.out.println("Puesto: " + rs.getString("puesto"));
+                    System.out.println("ID Reparacion " + rs.getString("ID_reparacion"));
+                    System.out.println("Nombre Reparación: " + rs.getString("Nombre_reparacion"));
+                    
+                    
                     System.out.println("Fecha Inicio: " + rs.getTimestamp("fechaInicio"));
                     System.out.println("Fecha Final: " + rs.getTimestamp("fechaFinal"));
+                    
+                    
+                    
+                    
                     System.out.println("Acabado: " + rs.getBoolean("acabado"));
                     System.out.println("Horas: " + rs.getDouble("horas"));
                     System.out.println("Asunto: " + rs.getString("asunto"));
@@ -311,11 +346,11 @@ public class ReparacionesDao {
             try (PreparedStatement stmt = conexion.prepareStatement(query)) {
                 ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
-                    System.out.println("ID Reparación: " + rs.getInt("idReparacion"));
-                    System.out.println("Nombre Reparación: " + rs.getString("nombreReparacion"));
-                    System.out.println("ID Cita: " + rs.getInt("idCita"));
-                    System.out.println("Fecha Inicio: " + rs.getTimestamp("fechaInicio"));
-                    System.out.println("Fecha Final: " + rs.getTimestamp("fechaFinal"));
+                    System.out.println("ID Reparación: " + rs.getInt("ID"));
+                    System.out.println("Nombre Reparación: " + rs.getString("Nombre_reparacion"));
+                    System.out.println("ID Cita: " + rs.getInt("ID_cita"));
+                    System.out.println("Fecha Inicio: " + rs.getTimestamp("Fecha_inicio"));
+                    System.out.println("Fecha Final: " + rs.getTimestamp("Fecha_final"));
                     System.out.println("Acabado: " + rs.getBoolean("acabado"));
                     System.out.println("Horas: " + rs.getDouble("horas"));
                     System.out.println("Asunto: " + rs.getString("asunto"));
@@ -331,16 +366,16 @@ public class ReparacionesDao {
     public void mostrarReparacionByFechaInicio(LocalDateTime fechaInicio){
         
         if(conexion != null){
-            String query = "SELECT * FROM reparaciones WHERE fechaInicio = ?";
+            String query = "SELECT * FROM reparaciones WHERE Fecha_inicio = ?";
             try (PreparedStatement stmt = conexion.prepareStatement(query)) {
                 stmt.setObject(1, fechaInicio, java.sql.Types.TIMESTAMP);
                 ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
-                    System.out.println("ID Reparación: " + rs.getInt("idReparacion"));
-                    System.out.println("Nombre Reparación: " + rs.getString("nombreReparacion"));
-                    System.out.println("ID Cita: " + rs.getInt("idCita"));
-                    System.out.println("Fecha Inicio: " + rs.getTimestamp("fechaInicio"));
-                    System.out.println("Fecha Final: " + rs.getTimestamp("fechaFinal"));
+                    System.out.println("ID Reparación: " + rs.getInt("ID"));
+                    System.out.println("Nombre Reparación: " + rs.getString("Nombre_reparacion"));
+                    System.out.println("ID Cita: " + rs.getInt("ID_cita"));
+                    System.out.println("Fecha Inicio: " + rs.getTimestamp("Fecha_inicio"));
+                    System.out.println("Fecha Final: " + rs.getTimestamp("Fecha_final"));
                     System.out.println("Acabado: " + rs.getBoolean("acabado"));
                     System.out.println("Horas: " + rs.getDouble("horas"));
                     System.out.println("Asunto: " + rs.getString("asunto"));
@@ -355,16 +390,16 @@ public class ReparacionesDao {
 
     public void mostrarReparacionByFechaFinal(LocalDateTime fechaFinal){
         if(conexion != null){
-            String query = "SELECT * FROM reparaciones WHERE fechaFinal = ?";
+            String query = "SELECT * FROM reparaciones WHERE Fecha_final = ?";
             try (PreparedStatement stmt = conexion.prepareStatement(query)) {
                 stmt.setObject(1, fechaFinal, java.sql.Types.TIMESTAMP);
                 ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
-                    System.out.println("ID Reparación: " + rs.getInt("idReparacion"));
-                    System.out.println("Nombre Reparación: " + rs.getString("nombreReparacion"));
-                    System.out.println("ID Cita: " + rs.getInt("idCita"));
-                    System.out.println("Fecha Inicio: " + rs.getTimestamp("fechaInicio"));
-                    System.out.println("Fecha Final: " + rs.getTimestamp("fechaFinal"));
+                    System.out.println("ID Reparación: " + rs.getInt("ID"));
+                    System.out.println("Nombre Reparación: " + rs.getString("Nombre_reparacion"));
+                    System.out.println("ID Cita: " + rs.getInt("ID_cita"));
+                    System.out.println("Fecha Inicio: " + rs.getTimestamp("Fecha_inicio"));
+                    System.out.println("Fecha Final: " + rs.getTimestamp("Fecha_final"));
                     System.out.println("Acabado: " + rs.getBoolean("acabado"));
                     System.out.println("Horas: " + rs.getDouble("horas"));
                     System.out.println("Asunto: " + rs.getString("asunto"));
@@ -380,16 +415,16 @@ public class ReparacionesDao {
     public void mostrarReparacionByFechaReciente(LocalDateTime fechaReciente){
         
         if(conexion != null){
-            String query = "SELECT * FROM reparaciones WHERE fechaInicio >= ?";
+            String query = "SELECT * FROM reparaciones WHERE Fecha_inicio >= ?";
             try (PreparedStatement stmt = conexion.prepareStatement(query)) {
                 stmt.setObject(1, fechaReciente, java.sql.Types.TIMESTAMP);
                 ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
-                    System.out.println("ID Reparación: " + rs.getInt("idReparacion"));
-                    System.out.println("Nombre Reparación: " + rs.getString("nombreReparacion"));
-                    System.out.println("ID Cita: " + rs.getInt("idCita"));
-                    System.out.println("Fecha Inicio: " + rs.getTimestamp("fechaInicio"));
-                    System.out.println("Fecha Final: " + rs.getTimestamp("fechaFinal"));
+                    System.out.println("ID Reparación: " + rs.getInt("ID"));
+                    System.out.println("Nombre Reparación: " + rs.getString("Nombre_reparacion"));
+                    System.out.println("ID Cita: " + rs.getInt("ID_cita"));
+                    System.out.println("Fecha Inicio: " + rs.getTimestamp("Fecha_inicio"));
+                    System.out.println("Fecha Final: " + rs.getTimestamp("Fecha_final"));
                     System.out.println("Acabado: " + rs.getBoolean("acabado"));
                     System.out.println("Horas: " + rs.getDouble("horas"));
                     System.out.println("Asunto: " + rs.getString("asunto"));
@@ -405,16 +440,17 @@ public class ReparacionesDao {
     public void mostrarReparacionByMatricula(String matricula){
         
         if(conexion != null){
-            String query = "SELECT * FROM reparaciones WHERE idCita IN (SELECT idCita FROM citas WHERE idCoche IN (SELECT idCoche FROM coches WHERE matricula = ?))";
+            String query = "SELECT * FROM reparaciones WHERE matricula = ?";
+            // Cambia "matricula" por el nombre correcto de la columna en tu tabla de reparaciones)";
             try (PreparedStatement stmt = conexion.prepareStatement(query)) {
                 stmt.setString(1, matricula);
                 ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
-                    System.out.println("ID Reparación: " + rs.getInt("idReparacion"));
-                    System.out.println("Nombre Reparación: " + rs.getString("nombreReparacion"));
-                    System.out.println("ID Cita: " + rs.getInt("idCita"));
-                    System.out.println("Fecha Inicio: " + rs.getTimestamp("fechaInicio"));
-                    System.out.println("Fecha Final: " + rs.getTimestamp("fechaFinal"));
+                    System.out.println("ID Reparación: " + rs.getInt("ID"));
+                    System.out.println("Nombre Reparación: " + rs.getString("Nombre_reparacion"));
+                    System.out.println("ID Cita: " + rs.getInt("ID_cita"));
+                    System.out.println("Fecha Inicio: " + rs.getTimestamp("Fecha_inicio"));
+                    System.out.println("Fecha Final: " + rs.getTimestamp("Fecha_final"));
                     System.out.println("Acabado: " + rs.getBoolean("acabado"));
                     System.out.println("Horas: " + rs.getDouble("horas"));
                     System.out.println("Asunto: " + rs.getString("asunto"));

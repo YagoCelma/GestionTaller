@@ -18,7 +18,7 @@ public class CocheDao {
                 return;
             }
 
-            String query = "INSERT INTO coches (matricula, marca, modelo, año, dni_cliente) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO Coches (matricula, marca, modelo, año, dni_cliente) VALUES (?, ?, ?, ?, ?)";
 
             try (PreparedStatement stmt = conexion.prepareStatement(query)) {
                 stmt.setString(1, matricula);
@@ -57,26 +57,31 @@ public class CocheDao {
     }
 
     public boolean matriculaRepetida(String matricula) {
-        if(conexion != null){
-            String query = "SELECT COUNT(*) FROM coches WHERE matricula = ?";
-            try (PreparedStatement stmt = conexion.prepareStatement(query)) {
-                stmt.setString(1, matricula);
-                ResultSet rs = stmt.executeQuery();
-                if (rs.next()) {
-                    return rs.getInt(1) > 0;
-                }
-            } catch (SQLException e) {
-                System.out.println("Error al comprobar la matrícula: " + e.getMessage());
-            }
+        if (conexion == null) {
+            System.err.println("Error: No hay conexión a la base de datos.");
             return false;
-        }else{
-            System.out.println("Error: No hay conexión a la base de datos.");
+        }
+    
+        // Usar try-with-resources para auto-cerrar recursos
+        try (PreparedStatement stmt = conexion.prepareStatement(
+                "SELECT 1 FROM coches WHERE matricula = ? LIMIT 1")) {
+            
+            stmt.setString(1, matricula);
+            
+            try (ResultSet rs = stmt.executeQuery()) {
+                // Si hay al menos un resultado, la matrícula existe
+                return rs.next();
+            }
+            
+        } catch (SQLException e) {
+            System.err.println("Error al comprobar la matrícula: " + e.getMessage());
             return false;
         }
 
     }
 
     public Coche cocheByMatricula(String matricula) {
+
         Coche coche = null;
         if (conexion != null) {
             String query = "SELECT matricula, marca, modelo, año, dni_cliente FROM coches WHERE matricula = ?";
@@ -97,5 +102,97 @@ public class CocheDao {
             }
         }
         return coche;
+    }
+
+    public void verCoches() {
+        if (conexion != null) {
+            String query = "SELECT * FROM coches";
+            try (Statement stmt = conexion.createStatement();
+                 ResultSet rs = stmt.executeQuery(query)) {
+                while (rs.next()) {
+                    System.out.println("Matrícula: " + rs.getString("matricula") +
+                            ", Marca: " + rs.getString("marca") +
+                            ", Modelo: " + rs.getString("modelo") +
+                            ", Año: " + rs.getInt("año") +
+                            ", DNI Cliente: " + rs.getString("dni_cliente"));
+                }
+            } catch (SQLException e) {
+                System.err.println("Error al mostrar los coches: " + e.getMessage());
+            }
+        }
+    }
+
+    public void verCocheByDNI(String dni_cliente) {
+        if (conexion != null) {
+            String query = "SELECT * FROM coches WHERE dni_cliente = ?";
+            try (PreparedStatement stmt = conexion.prepareStatement(query)) {
+                stmt.setString(1, dni_cliente);
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    System.out.println("Matrícula: " + rs.getString("matricula") +
+                            ", Marca: " + rs.getString("marca") +
+                            ", Modelo: " + rs.getString("modelo") +
+                            ", Año: " + rs.getInt("año"));
+                }
+            } catch (SQLException e) {
+                System.err.println("Error al mostrar los coches por DNI: " + e.getMessage());
+            }
+        }
+    }
+    public void verCocheByMatricula(String matricula) {
+        if (conexion != null) {
+            String query = "SELECT * FROM coches WHERE matricula = ?";
+            try (PreparedStatement stmt = conexion.prepareStatement(query)) {
+                stmt.setString(1, matricula);
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    System.out.println("Matrícula: " + rs.getString("matricula") +
+                            ", Marca: " + rs.getString("marca") +
+                            ", Modelo: " + rs.getString("modelo") +
+                            ", Año: " + rs.getInt("año") +
+                            ", DNI Cliente: " + rs.getString("dni_cliente"));
+                } else {
+                    System.out.println("No se encontró el coche con matrícula: " + matricula);
+                }
+            } catch (SQLException e) {
+                System.err.println("Error al mostrar el coche por matrícula: " + e.getMessage());
+            }
+        }
+    }
+    public void verCocheByMarca(String marca) {
+        if (conexion != null) {
+            String query = "SELECT * FROM coches WHERE marca = ?";
+            try (PreparedStatement stmt = conexion.prepareStatement(query)) {
+                stmt.setString(1, marca);
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    System.out.println("Matrícula: " + rs.getString("matricula") +
+                            ", Marca: " + rs.getString("marca") +
+                            ", Modelo: " + rs.getString("modelo") +
+                            ", Año: " + rs.getInt("año") +
+                            ", DNI Cliente: " + rs.getString("dni_cliente"));
+                }
+            } catch (SQLException e) {
+                System.err.println("Error al mostrar los coches por marca: " + e.getMessage());
+            }
+        }
+    }
+    public void verCocheByModelo(String modelo) {
+        if (conexion != null) {
+            String query = "SELECT * FROM coches WHERE modelo = ?";
+            try (PreparedStatement stmt = conexion.prepareStatement(query)) {
+                stmt.setString(1, modelo);
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    System.out.println("Matrícula: " + rs.getString("matricula") +
+                            ", Marca: " + rs.getString("marca") +
+                            ", Modelo: " + rs.getString("modelo") +
+                            ", Año: " + rs.getInt("año") +
+                            ", DNI Cliente: " + rs.getString("dni_cliente"));
+                }
+            } catch (SQLException e) {
+                System.err.println("Error al mostrar los coches por modelo: " + e.getMessage());
+            }
+        }
     }
 }

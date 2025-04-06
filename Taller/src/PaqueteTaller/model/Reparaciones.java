@@ -11,10 +11,10 @@ public class Reparaciones {
     private Double horas;
     private int idCita;
     
-    public Reparaciones(int idReparacion, String nombreReparacion, LocalDateTime fechaInicio, LocalDateTime fechaFinal,
+    public Reparaciones( String nombreReparacion, LocalDateTime fechaInicio, LocalDateTime fechaFinal,
     String asunto, boolean acabado, Double horas, int idCita){
 
-        this.idReparacion = idReparacion;
+       
         this.nombreReparacion = nombreReparacion;
         this.asunto = asunto;
         this.idCita = idCita; 

@@ -2,25 +2,33 @@ package PaqueteTaller.model;
 
 
 public class Inventario {
-    private String nombre;
-    private Double cantidad;
-    private Double precio;
 
-    public Inventario (String nombre, Double cantidad, Double precio){
-        this.nombre = nombre;
-        this.cantidad=cantidad;
-        this.precio=precio;
+    int numeroProducto;
+    String nombreObjeto;
+    int cantidad;
+    double precio;
+
+    public Inventario(int numeroProducto, String nombreObjeto, int cantidad, double precio){
+        this.numeroProducto = numeroProducto;
+        this.nombreObjeto = nombreObjeto;
+        this.cantidad = cantidad;
+        this.precio = precio;
     }
 
-    public String getNombre() { return nombre;}
-    public Double getCantidad() {return cantidad;}
-    public Double getPrecio(){return precio;}
-    
-    public void setNombre (String nombre) { this.nombre= nombre;}
-    public void setCantidad  ( Double cantidad) { this.cantidad=cantidad;}
-    public void setPrecio( Double precio) { this.precio=precio;}
+    public Inventario(){
+        
+    }
 
 
+    public int getNumeroProducto() {return numeroProducto;}
+    public void setNumeroProducto(int numeroProducto) {this.numeroProducto = numeroProducto;}
 
+    public String getNombreObjeto(){return nombreObjeto;}
+    public void setNombreObjeto(String nombreObjeto) {this.nombreObjeto = nombreObjeto;}
 
+    public int getCantidad() {return cantidad;}
+    public void setCantidad(int cantidad) {this.cantidad = cantidad;}
+
+    public double getPrecio() {return precio;}
+    public void setPrecio(double precio) {this.precio = precio;}
 }

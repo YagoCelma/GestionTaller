@@ -19,6 +19,7 @@ public class ReparacionesView {
             System.out.println("2. Eliminar reparación");
             System.out.println("3. Modificar reparación");
             System.out.println("4. Mostrar reparación");
+            System.out.println("5. Salir");
             opcion=sc.nextInt();
             sc.nextLine();
             switch(opcion){
@@ -26,6 +27,7 @@ public class ReparacionesView {
                 case 2 ->{this.eliminarReparacion();}
                 case 3 ->{this.modificarReparacion();}
                 case 4 ->{this.mostrarReparacionMenu();}
+                case 5 -> System.out.println("Saliendo del programa");
                 default -> System.out.println("Opción no válida");
             }
         }while(opcion!=5);
@@ -42,32 +44,18 @@ public class ReparacionesView {
         LocalDateTime fechaInicio;
         LocalDateTime fechaFinal= null;
         boolean acabado= false;
-        Double horas= null;
+        Double horas= 0.0;
         boolean seguir;
         boolean condicion;
         int idReparacion;
 
-        System.out.println("Introduce los siguientes datos");
-
-        do{
-            System.out.println("ID de la reparación");
-            idReparacion=sc.nextInt();
-            sc.nextLine();
-
-            seguir = reparacionDao.comprobarReparacion(idReparacion);
-            if (seguir){
-                System.out.println("El ID ya existe, introduce otro");
-                condicion = true;
-            }else{
-                condicion = false;
-            }
-        }while(condicion == true);
+        System.out.println("Introduce los siguientes datos:");
 
         System.out.println("Nombre de la reparación");
         nombreReparacion = sc.nextLine();
 
-        System.out.println("Citas filtradas por matrícula, elige el ID de la indicada e introdúcelo");
-        citas.verCitasMatricula();
+        System.out.println("ID de la cita");
+        //citas.verCitasMatricula();
         idCita=sc.nextInt();
         sc.nextLine();
         System.out.println("Asunto");
@@ -104,28 +92,28 @@ public class ReparacionesView {
         }
 
 
-        Reparaciones reparacion= new Reparaciones(idReparacion, nombreReparacion, fechaInicio, fechaFinal, asunto, acabado, horas, idCita );
+        Reparaciones reparacion= new Reparaciones(nombreReparacion, fechaInicio, fechaFinal, asunto, acabado, horas, idCita );
 
         reparacionDao.crearReparacion(reparacion);
 
         //metemos en una tabla auxiliar el id del empleado y la reparacion(si la reparacion esta completada, booleano de true)
         //reparacionDao.linkEmpleadosReparacion(idEmpleados);
 
-        
+        String idEmpleados;
         do{
-            System.out.println("ID del empleado");
-            idEmpleado= sc.nextInt();
+            System.out.println("ID del empleado asociado a la reparación");
+            idEmpleados= sc.nextLine();
             //idEmpleados.add(idEmpleado);
             System.out.println("Desea introducir otro empleado?");
             System.out.println("1. Sí");
             System.out.println("2. No");
             opcion=sc.nextInt();
             sc.nextLine();
-            reparacionDao.añadirEmpleado(reparacionDao.getIdReparacion(), idEmpleado);
+            reparacionDao.añadirEmpleado(reparacionDao.getIdReparacion(), idEmpleados);
         }while(opcion!=2);
 
-        System.out.println("Desea añadir gasto de productos?");
-        this.añadirGastoProductos();
+        //System.out.println("Desea añadir gasto de productos?");
+        //this.añadirGastoProductos();
 
     }
 
@@ -147,8 +135,10 @@ public class ReparacionesView {
             System.out.println("6. Por empleado");
             System.out.println("7. Activas (todavía no terminadas)");
             System.out.println("8. Por vehículo");
-            System.out.println("9. Salir");
+            System.out.println("9. Por ID empleado");
+            System.out.println("10. Salir");
             opcion=sc.nextInt();
+            sc.nextLine();
             switch(opcion){
                 case 1 ->{this.mostrarReparaciones();}
                 case 2 -> {this.mostrarReparacionById();}
@@ -158,9 +148,18 @@ public class ReparacionesView {
                 case 6 -> {this.mostrarReparacionByEmpleado();}
                 case 7 -> {this.mostrarReparacionActiva();}
                 case 8 -> {this.mostrarReparacionByVehiculo();}
+                case 9 -> {this.mostrarReparacionByEmpleadoId();}
+                case 10 -> System.out.println("Saliendo del programa");
                 default -> System.out.println("Opción no válida");
             }
-        }while(opcion!=9);   
+        }while(opcion!=10);   
+    }
+
+    public void mostrarReparacionByEmpleadoId(){
+        String idEmpleado;
+        System.out.println("Introduce el ID del trabajador");
+        idEmpleado = sc.nextLine();
+        reparacionDao.mostrarReparacionByEmpleado(idEmpleado);
     }
 
     public void mostrarReparacionByVehiculo(){
@@ -179,13 +178,13 @@ public class ReparacionesView {
     }
 
     public void mostrarReparacionByEmpleado(){
-        int idEmpleado;
+        String idEmpleado;
         System.out.println("Introduce el ID del trabajador");
-        idEmpleado = sc.nextInt();
-        sc.nextLine();
+        idEmpleado = sc.nextLine();
+        
        
         
-        reparacionDao.mostrarReparacionByTrabajador(idEmpleado);
+        reparacionDao.mostrarReparacionByEmpleado(idEmpleado);
 
 
     }
@@ -208,14 +207,14 @@ public class ReparacionesView {
         LocalDateTime fechaFinal;
         System.out.println("Introduce la fecha");
         fechaFinal = this.introducirFecha();
-        sc.nextLine();
+        
         reparacionDao.mostrarReparacionByFechaFinal(fechaFinal);
     }
     public void mostrarReparacionByMasRecientes(){
         LocalDateTime fechaInicio;
         System.out.println("Introduce la fecha más reciente");
         fechaInicio = this.introducirFecha();
-        sc.nextLine();
+        
         reparacionDao.mostrarReparacionByFechaReciente(fechaInicio);
     }
 
@@ -225,7 +224,7 @@ public class ReparacionesView {
         int opcion;
         int subOpcion;
         //LinkedList <Integer> idEmpleados = new LinkedList<>();
-        int idEmpleado;
+        String idEmpleado;
         String asunto;
         int idCita;
         LocalDateTime fechaInicio;
@@ -305,7 +304,7 @@ public class ReparacionesView {
                 
                 do{
                     System.out.println("ID del empleado");
-                    idEmpleado= sc.nextInt();
+                    idEmpleado= sc.nextLine();
                     //idEmpleados.add(idEmpleado);
                     System.out.println("Desea introducir otro ID?");
                     System.out.println("1. Sí");
@@ -319,7 +318,7 @@ public class ReparacionesView {
 
                 do{
                     System.out.println("ID del empleado");
-                    idEmpleado= sc.nextInt();
+                    idEmpleado= sc.nextLine();
                      //idEmpleados.add(idEmpleado);
                     System.out.println("Desea eliminar otro ID?");
                     System.out.println("1. Sí");
@@ -330,6 +329,7 @@ public class ReparacionesView {
                 }while(opcion!=2);
 
             }
+            case 11 -> System.out.println("Saliendo del programa");
             default -> System.out.println("Opción no válida");
         }
         }while(opcion!=11);

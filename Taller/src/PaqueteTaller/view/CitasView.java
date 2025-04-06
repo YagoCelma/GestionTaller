@@ -1,7 +1,7 @@
 package PaqueteTaller.view;
 import PaqueteTaller.DAO.CitasDao;
 import PaqueteTaller.model.Citas;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.util.Scanner;
 public class CitasView {
 
@@ -74,31 +74,34 @@ public class CitasView {
         matricula=sc.nextLine();
 
         Citas cita= new Citas(fecha, dniCliente, asunto, matricula);
+        citasDao.crearCita(cita);
+       
 
     }
     public void verCitas(){
 
         int opcion;
+        do{
+            System.out.println("¿Cómo desea ver las citas?");
+            System.out.println("1. Por DNI");
+            System.out.println("2. Por fecha");
+            System.out.println("3. Por vehículo");
+            System.out.println("4. Por ID");
+            System.out.println("5. Ver todas las citas");
+            System.out.println("6. Salir");
 
-        System.out.println("Desea la opción para filtrar citas:");
-        System.out.println("1. Por DNI");
-        System.out.println("2. Por fecha");
-        System.out.println("3. Por vehículo");
-        System.out.println("4. Por ID");
-        System.out.println("5. Salir");
-
-        opcion=sc.nextInt();
-        sc.nextLine();
-
-        switch(opcion){
-            case 1 ->{this.verCitasDni();}
-            case 2 ->{this.verCitasFecha();}
-            case 3 ->{this.verCitasMatricula();}
-            case 4 ->{this.verCitasId();}
-        
-
-        }
-
+            opcion=sc.nextInt();
+            sc.nextLine();
+            switch(opcion){
+                case 1 ->{this.verCitasDni();}
+                case 2 ->{this.verCitasFecha();}
+                case 3 ->{this.verCitasMatricula();}
+                case 4 ->{this.verCitasId();}
+                case 5 ->{citasDao.verTodasCitas();}
+                case 6 ->{}
+                default -> System.out.println("Opción no válida");
+            }
+        }while(opcion!=6);
     }
 
     public void verCitasDni(){
@@ -127,20 +130,17 @@ public class CitasView {
         int año;
         int mes;
         int dia;
-        int hora;
-        int minuto;
-        LocalDateTime fecha;
-        System.out.println("Escribe la nueva fecha");
-        System.out.println("Si quieres evitar un dato, escribe 0");
-        System.out.println("Por ejemplo: si solo quieres ver los pedidos de un mes, introduce 0 en los demás datos expecto en el del mes");
+        
        
-       /* 
+        System.out.println("Escribe la nueva fecha");
+        
+       
+       
         System.out.println("Filtra por:");
         System.out.println("1. Año");
         System.out.println("2. Mes");
         System.out.println("3. Día");
-        System.out.println("4. Hora");
-        System.out.println("5. Minuto");
+        
 
 
         opcion=sc.nextInt();
@@ -150,29 +150,36 @@ public class CitasView {
                 System.out.println("Año:");
                 año=sc.nextInt();
                 sc.nextLine();
-                fecha=(año, null, null, null, null);
+                
+                citasDao.verCitasFechaAño(año);
             }
-        }
-        */
-        System.out.println("Año:");
-        año=sc.nextInt();
-        sc.nextLine();
-        System.out.println("Mes:");
-        mes=sc.nextInt();
-        sc.nextLine();
-        System.out.println("Día:");
-        dia=sc.nextInt();
-        sc.nextLine();
-        System.out.println("Hora:");
-        hora=sc.nextInt();
-        sc.nextLine();
-        System.out.println("Minuto:");
-        minuto=sc.nextInt();
-        sc.nextLine();
-        fecha=LocalDateTime.of(año, mes, dia, hora, minuto);
+            case 2 ->{
+                System.out.println("Año:");
+                año=sc.nextInt();
+                sc.nextLine();
+                System.out.println("Mes:");
+                mes=sc.nextInt();
+                sc.nextLine();
+                
+                citasDao.verCitasFechaMes(mes);
+            }
+            case 3 ->{
+                System.out.println("Año:");
+                año=sc.nextInt();
+                sc.nextLine();
+                System.out.println("Mes:");
+                mes=sc.nextInt();
+                sc.nextLine();
+                System.out.println("Día:");
+                dia=sc.nextInt();
+                sc.nextLine();
 
+                citasDao.verCitasFechaDia(año, mes, dia);
+            }
+            default -> System.out.println("Opción no válida");
+        }
         
-        citasDao.verCitasFecha(fecha);
+       
 
     }
     

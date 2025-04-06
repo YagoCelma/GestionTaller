@@ -24,7 +24,8 @@ public class CocheView {
             System.out.println("1. Añadir coche");
             System.out.println("2. Borrar coche");
             System.out.println("3. Modificar coche");
-            System.out.println("4. Salir");
+            System.out.println("4. Ver coches");
+            System.out.println("5. Salir");
             opcion = sc.nextInt();
             sc.nextLine();
     
@@ -32,10 +33,11 @@ public class CocheView {
                 case 1-> añadirCoche();
                 case 2-> borrarCoche();
                 case 3-> modificarCoche();
-                case 4 -> System.out.println("Saliendo del programa");
+                case 4 -> verCoches();
+                case 5 -> System.out.println("Saliendo del programa");
                 default-> System.out.println("Opcion no válida, intentelo de nuevo");
             }
-        }while(opcion != 4);
+        }while(opcion != 5);
     }
 
     public void añadirCoche(){
@@ -64,7 +66,7 @@ public class CocheView {
         String dniAsociado = sc.nextLine();
 
         cocheDAO.añadirCoche(matricula, marca, modelo, año, dniAsociado);
-        System.out.println("El cliente ha sido añadido con exito");
+        
     }
 
     public void modificarCoche(){
@@ -136,6 +138,44 @@ public class CocheView {
         }while(opcion != 6);
     }
 
+    public void verCoches(){
+        int opcion;
+        System.out.println("Elige una opción:");
+        System.out.println("1. Ver todos los coches");
+        System.out.println("2. Ver coche por matricula");
+        System.out.println("3. Ver coche por DNI del cliente");
+        System.out.println("4. Ver coche por marca");
+        System.out.println("5. Ver coche por modelo");
+        System.out.println("6. Salir"); 
+        opcion = sc.nextInt();
+        sc.nextLine();
+        switch(opcion){
+            case 1 -> cocheDAO.verCoches();
+            case 2 -> {
+                System.out.println("Introduce la matricula");
+                String matricula = sc.nextLine();
+                cocheDAO.verCocheByMatricula(matricula);
+            }
+            case 3 -> {
+                System.out.println("Introduce el DNI del cliente");
+                String dni = sc.nextLine();
+                cocheDAO.verCocheByDNI(dni);
+            }
+            case 4 -> {
+                System.out.println("Introduce la marca");
+                String marca = sc.nextLine();
+                cocheDAO.verCocheByMarca(marca);
+            }
+            case 5 -> {
+                System.out.println("Introduce el modelo");
+                String modelo = sc.nextLine();
+                cocheDAO.verCocheByModelo(modelo);
+            }
+            case 6 -> System.out.println("Saliendo del menú de coches.");
+            default -> System.out.println("Opción no válida. Por favor, elige una opción del menu.");
+        }
+
+    }
     public void borrarCoche(){
         String matricula;
         boolean matriculaRepetida;
