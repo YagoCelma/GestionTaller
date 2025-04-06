@@ -46,7 +46,7 @@ public class PagosView {
         
         System.out.println("Introduce el precio de la reparacion");
         double precioReparacion = sc.nextDouble();
-
+        sc.nextLine();
 
             
 
@@ -74,6 +74,7 @@ public class PagosView {
         
         System.out.println("Introduce el pago");
         double pagoEmpleado = sc.nextDouble();
+        sc.nextLine();
 
 
             

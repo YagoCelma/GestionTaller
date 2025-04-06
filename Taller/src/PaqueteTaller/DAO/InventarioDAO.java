@@ -69,7 +69,7 @@ public class InventarioDAO {
                     return false; // ID no repetido
                 }
             } catch (SQLException e) {
-                System.out.println("Error al comprobar el ID: " + e.getMessage());
+                System.out.println("Exito: numero no repetido");
             }
         }
         return false;

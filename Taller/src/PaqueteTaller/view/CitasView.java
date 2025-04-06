@@ -98,7 +98,7 @@ public class CitasView {
                 case 3 ->{this.verCitasMatricula();}
                 case 4 ->{this.verCitasId();}
                 case 5 ->{citasDao.verTodasCitas();}
-                case 6 ->{}
+                case 6 ->{ System.out.println("Saliendo del menú de citas");}
                 default -> System.out.println("Opción no válida");
             }
         }while(opcion!=6);

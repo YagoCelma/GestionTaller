@@ -16,7 +16,8 @@ public class App {
         EmpleadoView emlpeadoView = new EmpleadoView();
         ReparacionesView reparacionView = new ReparacionesView();
         PagosView pagosView = new PagosView();
-        //InventarioView inventarioView = new InventarioView();
+        InventarioView inventarioView = new InventarioView();
+        
 
 
         int opcion;
@@ -28,10 +29,9 @@ public class App {
             System.out.println("3. Citas");
             System.out.println("4. Empleado");
             System.out.println("5. Reparaciones");
-            System.out.println("6. Pedidos");
-            System.out.println("7. Inventario");
-            System.out.println("8. Pagos");
-            System.out.println("9. Salir");
+            System.out.println("6. Inventario");
+            System.out.println("7. Pagos");
+            System.out.println("8. Salir");
 
 
             opcion = sc.nextInt();
@@ -43,12 +43,11 @@ public class App {
                 case 3 -> citasView.menuCitas();
                 case 4 -> emlpeadoView.menuEmpleado();
                 case 5 -> reparacionView.menuReparaciones();
-                case 6 -> {}
-                case 7 -> {//inventarioView.menuInventario();
-                    }
-                case 8 -> {pagosView.menuPagos();}
+                case 6 -> inventarioView.menuInventario();               
+                case 7 -> pagosView.menuPagos();
+                case 8 -> System.out.println("Saliendo del menu de gestion de taller");
                 default -> System.out.println("Opción no válida");
             }
-        }while(opcion != 9);
+        }while(opcion != 8);
     }
 }

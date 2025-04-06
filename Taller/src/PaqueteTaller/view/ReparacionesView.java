@@ -289,11 +289,13 @@ public class ReparacionesView {
             case 6 -> {
                 System.out.println("Introduce horas");
                 horas=sc.nextDouble();
+                sc.nextLine();
                 reparacionDao.setHoras(idReparacion, horas);
             }
             case 7 -> {
                 System.out.println("Asunto");
                 asunto=sc.nextLine();
+
                 reparacionDao.setAsunto(idReparacion, asunto);
             }
             case 8 -> {
@@ -352,6 +354,7 @@ public class ReparacionesView {
             sc.nextLine();
             System.out.println("Precio");
             precio=sc.nextDouble();
+            sc.nextLine();
             System.out.println("Id de reparación");
             reparacionId=sc.nextInt();
             sc.nextLine();

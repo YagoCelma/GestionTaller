@@ -42,7 +42,8 @@ public class PagosDao {
         try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                System.out.println("ID: " + rs.getInt("ID_reparacion") + ", Precio: " + rs.getDouble("Precio") + ", Concepto: " + rs.getString("Concepto"));
+                System.out.println("ID: " + rs.getInt("ID_reparacion") + ", Precio: " + rs.getDouble("Precio") + ", Concepto: " + rs.getString("Concepto") + ", Fecha: " + rs.getTimestamp("fecha_registro"));
+                System.out.println("-------------------------------");
             }
         } catch (SQLException e) {
             System.out.println("Error al obtener los ingresos: " + e.getMessage());
@@ -55,7 +56,8 @@ public class PagosDao {
         try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                System.out.println("ID: " + rs.getString("ID_empleado") + ", Precio: " + rs.getDouble("Precio") + ", Concepto: " + rs.getString("Concepto"));
+                System.out.println("ID: " + rs.getString("ID_empleado") + ", Precio: " + rs.getDouble("Precio") + ", Concepto: " + rs.getString("Concepto") + ", Fecha: " + rs.getTimestamp("fecha_registro"));
+            System.out.println("-------------------------------");
             }
         } catch (SQLException e) {
             System.out.println("Error al obtener los pagos de empleados: " + e.getMessage());

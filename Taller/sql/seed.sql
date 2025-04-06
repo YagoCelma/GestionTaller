@@ -1,7 +1,5 @@
 USE GestionTaller;
 
-INSERT INTO Clientes (DNI, Nombre, Apellido, Telefono, Direccion, Email, Cuenta_bancaria)
-VALUES ('12345678A', 'Juan', 'Pérez', 123456789, 'Calle Falsa 123', 'juan@example.com', 'ES1234567890123456789012');
 
 CREATE TABLE Clientes (
     DNI VARCHAR(20) PRIMARY KEY,
@@ -13,7 +11,7 @@ CREATE TABLE Clientes (
     Cuenta_bancaria VARCHAR(34)
 );
 
-USE GestionTaller;
+
 CREATE TABLE Citas (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     DNI VARCHAR(20) NOT NULL,
@@ -23,7 +21,7 @@ CREATE TABLE Citas (
     FOREIGN KEY (DNI) REFERENCES Clientes(DNI)
 );
 
-USE GestionTaller;
+
 CREATE TABLE Reparaciones (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     Nombre_reparacion VARCHAR(100) NOT NULL,
@@ -35,7 +33,18 @@ CREATE TABLE Reparaciones (
     Acabado BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (ID_cita) REFERENCES Citas(ID)
 );
-USE GestionTaller;
+
+CREATE TABLE Empleados(
+    ID VARCHAR(50) PRIMARY KEY,
+    nombre VARCHAR(50) NOT NULL,
+    telefono VARCHAR(15) NOT NULL,
+    direccion VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL,
+    puesto VARCHAR(50) NOT NULL,
+    fecha_contratacion DATETIME NOT NULL,
+    salario DECIMAL(10, 2) NOT NULL
+);
+
 CREATE TABLE Empleados_Reparaciones (
     ID_empleado VARCHAR(50) NOT NULL,
     ID_reparacion INT NOT NULL,
@@ -43,17 +52,9 @@ CREATE TABLE Empleados_Reparaciones (
     FOREIGN KEY (ID_empleado) REFERENCES Empleados(ID),
     FOREIGN KEY (ID_reparacion) REFERENCES Reparaciones(ID)
 );
-USE GestionTaller;
-CREATE TABLE Productos_Reparaciones (
-    ID_producto INT NOT NULL,
-    ID_reparacion INT NOT NULL,
-    Cantidad DECIMAL(10,2) NOT NULL DEFAULT 1,
-    Precio_unidad DECIMAL(10,2) NOT NULL,
-    PRIMARY KEY (ID_producto, ID_reparacion),
-    FOREIGN KEY (ID_producto) REFERENCES Inventario(ID),
-    FOREIGN KEY (ID_reparacion) REFERENCES Reparaciones(ID)
-);
-USE GestionTaller;
+
+
+
 CREATE TABLE Pagos (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     ID_reparacion INT NOT NULL,
@@ -72,7 +73,7 @@ CREATE TABLE Gastos(
     fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (ID_empleado) REFERENCES Empleados(ID)
 );
-USE GestionTaller;
+
 CREATE TABLE Coches(
     matricula VARCHAR(40) PRIMARY KEY,
     marca VARCHAR(20) NOT NULL,
@@ -83,25 +84,6 @@ CREATE TABLE Coches(
 );
 
 
-
-USE GestionTaller;
-CREATE TABLE Empleados(
-    ID VARCHAR(50) PRIMARY KEY,
-    nombre VARCHAR(50) NOT NULL,
-    telefono VARCHAR(15) NOT NULL,
-    direccion VARCHAR(50) NOT NULL,
-    email VARCHAR(50) NOT NULL,
-    puesto VARCHAR(50) NOT NULL,
-    fecha_contratacion DATETIME NOT NULL,
-    salario DECIMAL(10, 2) NOT NULL
-);
-
-
-
-
-
-
-USE GestionTaller;
 CREATE TABLE Inventario(
     ID_Producto INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(40) NOT NULL,
@@ -109,3 +91,12 @@ CREATE TABLE Inventario(
     precio DECIMAL(10, 2) NOT NULL,
 );
 
+CREATE TABLE Productos_Reparaciones (
+    ID_producto INT NOT NULL,
+    ID_reparacion INT NOT NULL,
+    Cantidad DECIMAL(10,2) NOT NULL DEFAULT 1,
+    Precio_unidad DECIMAL(10,2) NOT NULL,
+    PRIMARY KEY (ID_producto, ID_reparacion),
+    FOREIGN KEY (ID_producto) REFERENCES Inventario(ID),
+    FOREIGN KEY (ID_reparacion) REFERENCES Reparaciones(ID)
+);
